@@ -68,22 +68,13 @@ DOMAIN-SUFFIX,githubcopilot.com
 DOMAIN-SUFFIX,api.githubcopilot.com
 DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com
 
-# AI search, assistants and autonomous agents (18)
+# AI search, assistants and autonomous agents (17)
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,perplexity.com
 DOMAIN-SUFFIX,pplx.ai
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,mistral.ai
-DOMAIN-SUFFIX,meta.ai
-
-# Meta Muse and sign-in endpoints
-DOMAIN-SUFFIX,muse.ai
-DOMAIN-SUFFIX,metaaivm.com
-DOMAIN-SUFFIX,auth.meta.com
-DOMAIN-SUFFIX,ai.meta.com
-DOMAIN-SUFFIX,metaaiusercontent.com
-DOMAIN-SUFFIX,accountscenter.facebook.com
 DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,deepseek.com
 DOMAIN-SUFFIX,kimi.com
@@ -95,6 +86,33 @@ DOMAIN-SUFFIX,character.ai
 DOMAIN-SUFFIX,phind.com
 DOMAIN-SUFFIX,felo.ai
 DOMAIN-SUFFIX,z.ai
+
+# Meta / Muse and connected services (25)
+DOMAIN-SUFFIX,meta.com
+DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,muse.ai
+DOMAIN-SUFFIX,metaaivm.com
+DOMAIN-SUFFIX,metaaiusercontent.com
+DOMAIN-SUFFIX,facebook.com
+DOMAIN-SUFFIX,facebook.net
+DOMAIN-SUFFIX,fbcdn.net
+DOMAIN-SUFFIX,fbsbx.com
+DOMAIN-SUFFIX,fb.com
+DOMAIN-SUFFIX,fb.me
+DOMAIN-SUFFIX,fb.watch
+DOMAIN-SUFFIX,fbpigeon.com
+DOMAIN-SUFFIX,tfbnw.net
+DOMAIN-SUFFIX,instagram.com
+DOMAIN-SUFFIX,cdninstagram.com
+DOMAIN-SUFFIX,threads.com
+DOMAIN-SUFFIX,threads.net
+DOMAIN-SUFFIX,messenger.com
+DOMAIN-SUFFIX,m.me
+DOMAIN-SUFFIX,whatsapp.com
+DOMAIN-SUFFIX,whatsapp.net
+DOMAIN-SUFFIX,wa.me
+DOMAIN-SUFFIX,oculus.com
+DOMAIN-SUFFIX,oculuscdn.com
 
 # AI coding agents and app builders (12)
 DOMAIN-SUFFIX,cursor.com
