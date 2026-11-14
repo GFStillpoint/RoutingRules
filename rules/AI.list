@@ -76,6 +76,14 @@ DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,mistral.ai
 DOMAIN-SUFFIX,meta.ai
+
+# Meta Muse and sign-in endpoints
+DOMAIN-SUFFIX,muse.ai
+DOMAIN-SUFFIX,metaaivm.com
+DOMAIN-SUFFIX,auth.meta.com
+DOMAIN-SUFFIX,ai.meta.com
+DOMAIN-SUFFIX,metaaiusercontent.com
+DOMAIN-SUFFIX,accountscenter.facebook.com
 DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,deepseek.com
 DOMAIN-SUFFIX,kimi.com
