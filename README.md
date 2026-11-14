@@ -29,21 +29,6 @@ Lines starting with `#` are comments. The lists contain matching rules only; pro
 
 The rule providers refresh independently. If the extension script itself changes, a client that stores an imported copy may need the script re-imported.
 
-## Karing
-
-Karing uses sing-box JSON source rule sets rather than Loon `.list` subscriptions:
-
-| Karing rule set | Source list |
-| --- | --- |
-| `karing/AI.json` | `rules/AI.list` |
-| `karing/Crypto.json` | `rules/Crypto.list` |
-| `karing/US_Media_Finance.json` | `rules/US_Media_Finance.list` |
-| `karing/Utility.json` | `rules/Utility.list` |
-
-Each JSON rule set contains the same domain suffixes as its source list. In Karing, add a remote `Rule Set` in a custom diversion group and set the outbound action separately.
-
-**Keep the JSON files in sync when editing a `.list` file.** Only the source `.list` should be edited for domain changes; then regenerate the matching JSON from its domain suffix entries. No credentials or client settings are stored in either format.
-
 ## Maintenance
 
 1. Update the most specific existing list for the domain or service.
