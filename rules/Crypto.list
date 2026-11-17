@@ -211,3 +211,9 @@ DOMAIN-SUFFIX,bitcoin.com
 DOMAIN-SUFFIX,beincrypto.com
 DOMAIN-SUFFIX,cryptobriefing.com
 
+# Wallet V ecosystem, Virgo, Aster DEX and Polymarket
+# Includes only verified primary domains; third-party app/API hosts may require separate rules.
+DOMAIN-SUFFIX,walletv.io
+DOMAIN-SUFFIX,virgo.co
+DOMAIN-SUFFIX,asterdex.com
+DOMAIN-SUFFIX,polymarket.com
