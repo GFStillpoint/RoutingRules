@@ -122,8 +122,9 @@ def build() -> dict[Path, str]:
     proxy, proxy_domains, proxy_urls = fetch_pair("Proxy")
     direct_custom = read_local("Direct_Custom.list", 100)
     overseas_custom = read_local("Overseas_Custom.list", 7)
-    utility = read_local("Overseas_Utility.list", 550)
+    utility = read_local("Overseas_Utility.list", 12)
     us_ai = read_local("US_AI.list", 195)
+    us_google = read_local("US_Google.list", 570)
     us_finance = read_local("US_Finance.list", 300)
 
     # The source text of Crypto is intentionally copied unmodified for old URLs.
@@ -132,18 +133,23 @@ def build() -> dict[Path, str]:
     if len(crypto) < 190:
         raise ValueError(f"Crypto source unexpectedly short: {len(crypto)}")
 
-    us = merged(us_ai, us_finance)
+    us = merged(us_ai, us_google, us_finance)
     china_only = merged(direct_custom, china, china_domains)
     direct = merged(direct_custom, china, china_domains, apple, apple_domains)
-    # Overseas should precede Direct for selected .cn exceptions (for example
-    # google.cn), because the China source contains DOMAIN-SUFFIX,cn.
-    # Exact rules also present in Direct are removed from Overseas, preserving
-    # their explicit DIRECT intent even when Overseas is listed first.
+    # Specific US/Crypto subscriptions should precede broader Overseas/Direct.
+    # Remove exactly duplicated Direct and US entries from Overseas; more
+    # general base rules continue to cover unrelated services.
     direct_keys = set(direct)
+    us_keys = set(us)
     overseas = [rule for rule in merged(overseas_custom, utility, proxy, proxy_domains)
-                if rule not in direct_keys]
+                if rule not in direct_keys and rule not in us_keys]
 
-    must_include("US", us, ("DOMAIN-SUFFIX,openai.com", "DOMAIN-SUFFIX,bloomberg.com"))
+    must_include("US", us, (
+        "DOMAIN-SUFFIX,openai.com", "DOMAIN-SUFFIX,bloomberg.com",
+        "DOMAIN-SUFFIX,google.com", "DOMAIN-SUFFIX,google.cn",
+        "DOMAIN-SUFFIX,youtube.com", "DOMAIN-SUFFIX,gmail.com",
+        "DOMAIN-SUFFIX,googleapis.com", "DOMAIN-KEYWORD,google",
+    ))
     must_include("Crypto", crypto, ("DOMAIN-SUFFIX,hyperliquid.xyz", "DOMAIN-SUFFIX,tradingview.com"))
     must_include("China", china_only, (
         "DOMAIN-SUFFIX,qcc.com", "DOMAIN-SUFFIX,qichacha.com",
@@ -164,7 +170,7 @@ def build() -> dict[Path, str]:
 
     outputs = {
         OUTPUTS / "US.list": format_rules(
-            "US", us, ["sources/US_AI.list", "sources/US_Finance.list"], "choose an appropriate client strategy"
+            "US", us, ["sources/US_AI.list", "sources/US_Google.list", "sources/US_Finance.list"], "choose an appropriate client strategy"
         ),
         OUTPUTS / "Crypto.list": crypto_text,
         OUTPUTS / "Direct.list": format_rules(
