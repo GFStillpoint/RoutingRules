@@ -107,7 +107,7 @@ def format_rules(name: str, rules: list[str], sources: list[str], policy: str) -
     header = [
         f"# NAME: {name}",
         "# FORMAT: Loon classical rules; one match per line without a policy",
-        f"# POLICY: {policy} (selected in the Loon subscription)",
+        f"# SUGGESTED POLICY: {policy}; policy is assigned by the Loon client",
         "# AUTO-GENERATED: edit sources/*.list, not this file",
         *[f"# SOURCE: {source}" for source in sources],
         f"# RULES: {len(rules)}",
@@ -120,11 +120,11 @@ def build() -> dict[Path, str]:
     china, china_domains, china_urls = fetch_pair("China")
     apple, apple_domains, apple_urls = fetch_pair("Apple")
     proxy, proxy_domains, proxy_urls = fetch_pair("Proxy")
-    direct_custom = read_local("Direct_Custom.list", 2)
+    direct_custom = read_local("Direct_Custom.list", 100)
     overseas_custom = read_local("Overseas_Custom.list", 7)
     utility = read_local("Overseas_Utility.list", 550)
-    us_ai = read_local("US_AI.list", 140)
-    us_finance = read_local("US_Finance.list", 130)
+    us_ai = read_local("US_AI.list", 195)
+    us_finance = read_local("US_Finance.list", 300)
 
     # The source text of Crypto is intentionally copied unmodified for old URLs.
     crypto_text = (SOURCES / "Crypto.list").read_text(encoding="utf-8-sig")
@@ -146,9 +146,19 @@ def build() -> dict[Path, str]:
     must_include("Direct", direct, ("DOMAIN-SUFFIX,apple.com", "DOMAIN-SUFFIX,icloud.com"))
     must_include("Overseas", overseas, ("DOMAIN-SUFFIX,github.com", "DOMAIN-SUFFIX,githubusercontent.com"))
 
+    must_include("US", us, (
+        "DOMAIN-SUFFIX,refuseless.com", "DOMAIN-SUFFIX,cursorapi.com",
+        "DOMAIN-SUFFIX,institutionalinvestor.com", "DOMAIN-SUFFIX,afp.com",
+    ))
+    must_include("Direct", direct, (
+        "DOMAIN-SUFFIX,psbc.com", "DOMAIN-SUFFIX,bankcomm.com",
+        "DOMAIN-SUFFIX,unionpay.com", "DOMAIN,sysdk.cl2009.com",
+        "DOMAIN,analytics.oceanengine.com",
+    ))
+
     outputs = {
         OUTPUTS / "US.list": format_rules(
-            "US", us, ["sources/US_AI.list", "sources/US_Finance.list"], "US node"
+            "US", us, ["sources/US_AI.list", "sources/US_Finance.list"], "choose an appropriate client strategy"
         ),
         OUTPUTS / "Crypto.list": crypto_text,
         OUTPUTS / "Direct.list": format_rules(
@@ -159,7 +169,7 @@ def build() -> dict[Path, str]:
         OUTPUTS / "Overseas.list": format_rules(
             "Overseas", overseas, [
                 "sources/Overseas_Custom.list", "sources/Overseas_Utility.list", *proxy_urls,
-            ], "Available (auto-testing)"
+            ], "choose an appropriate client strategy"
         ),
         # Keep the old China and Crypto subscription URLs working during migration.
         LEGACY / "China.list": "\n".join([
