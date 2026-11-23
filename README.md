@@ -31,14 +31,15 @@ https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/Over
 ```text
 US       -> [自选策略]
 Crypto   -> [自选策略]
-Direct   -> DIRECT
 Overseas -> [自选策略]
+Direct   -> DIRECT
 # 可选：GEOIP,CN,DIRECT,no-resolve
 FINAL    -> [独立决定：DIRECT / 代理 / 其他]
 ```
 
 - **Overseas 不是 FINAL。** 只处理命中其规则的流量；未命中请求由后续本地规则或 FINAL 决定。
-- 不同清单可能包含相同域名，Loon 的规则顺序会影响最终匹配；例如专门的 AI 域名通常应在普通 Google 域名规则之前。
+- **Overseas 通常建议排在 Direct 前面。** China 来源含 `DOMAIN-SUFFIX,cn`，否则如 `google.cn`、`googleapis.cn` 这类明确列入 Overseas 的例外会先被直连。
+- US 和 Crypto 等专项规则仍应排在 Overseas 前面。构建器还会从 Overseas 中移除与 Direct **完全相同**的规则，减少 Apple / 国内服务的直接冲突；其他父子域名或关键词重叠仍需在 Loon 中核查。
 - `GEOIP,CN,DIRECT,no-resolve` 是可选的本地 IP 归属规则，不是本仓库必需的订阅。若 `FINAL=DIRECT`，其作用可能主要是提前匹配和记录，而非改变路由结果。
 - `DOMAIN-SUFFIX` 覆盖域名及其子域名；尽量使用具体服务域名，不对所有第三方 CDN、验证码、云存储或支付网关进行一刀切分流。
 - Loon 分流规则与 HTTPS MitM 是不同机制。**银行、支付、钱包等敏感服务不应默认加入不受信任的 MitM 解密范围**。
