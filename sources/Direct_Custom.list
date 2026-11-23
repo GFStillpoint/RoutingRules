@@ -1,0 +1,9 @@
+# NAME: Direct Custom Rules
+# Custom rules routed DIRECT when subscribed via Direct.list.
+# Keep one Loon rule per line, WITHOUT a policy suffix.
+# All entries in the generated Direct.list must be subscribed with policy DIRECT.
+# Do not edit the generated subscriptions/Direct.list directly.
+
+# Qichacha third-party SDK hosts observed as FINAL -> Available in Loon HAR (2026-11-23)
+DOMAIN,sysdk.cl2009.com
+DOMAIN,analytics.oceanengine.com
