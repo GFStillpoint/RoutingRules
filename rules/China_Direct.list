@@ -1,8 +1,0 @@
-# NAME: China Direct Overrides
-# FORMAT: Loon / Mihomo classical domain rules
-# POLICY: DIRECT (assign DIRECT when subscribing; file does not select policy)
-# Scope: exact hosts observed in Qichacha HAR, 2026-11-23
-# Avoid broad parent-domain matching to minimize unrelated effects.
-
-DOMAIN,sysdk.cl2009.com
-DOMAIN,analytics.oceanengine.com
