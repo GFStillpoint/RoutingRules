@@ -235,3 +235,13 @@ DOMAIN-SUFFIX,topazlabs.com
 DOMAIN-SUFFIX,hedra.com
 DOMAIN-SUFFIX,minimax.io
 DOMAIN-SUFFIX,haiper.ai
+
+# Cursor documented application delivery and authentication endpoints
+# Only exact shared cloud hosts are included; never route s3.amazonaws.com globally.
+DOMAIN-SUFFIX,cursor-cdn.com
+DOMAIN-SUFFIX,cursorvm.com
+DOMAIN,anysphere-binaries.s3.us-east-1.amazonaws.com
+DOMAIN,agent-stores.s3.us-east-1.amazonaws.com
+DOMAIN,agent-stores.s3.amazonaws.com
+DOMAIN,cursor.blob.core.windows.net
+DOMAIN,accounts.spacex.ai
