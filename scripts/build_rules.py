@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Refresh merged Loon classical rules from blackmatrix7's rule + domain-set pairs.
+"""Build four Loon subscriptions from curated local inputs and blackmatrix7.
 
-Outputs China.list, Apple.list and Global.list, preserving source rule types.
-Optional rules/<name>_Custom.list entries are merged ahead of upstream rules.
-No source is published when any fetch/validation fails. Outputs are stable so
-no commit occurs when upstream contents have not changed.
+Output:
+    subscriptions/{US,Crypto,Direct,Overseas}.list
+    rules/China.list and rules/Crypto.list (temporary legacy aliases)
+
+If any upstream fetch or input validation fails, stop without writing any output.
+Do not manually edit generated files.
 """
-
 from __future__ import annotations
 
 from pathlib import Path
@@ -14,106 +15,178 @@ import re
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
-RULES = ROOT / "rules"
+SOURCES = ROOT / "sources"
+OUTPUTS = ROOT / "subscriptions"
+LEGACY = ROOT / "rules"
 UPSTREAM = "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon"
-ALLOWED = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "USER-AGENT", "IP-CIDR", "IP-CIDR6"}
-DOMAIN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*\Z")
+ALLOWED_TYPES = {
+    "DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "USER-AGENT",
+    "IP-CIDR", "IP-CIDR6",
+}
+VALID_DOMAIN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*\Z")
 
-# Loon display name -> (upstream directory, upstream basename, minimum classical, minimum domain-set)
-SETS = {
+REMOTE = {
     "China": ("China", "China", 50, 3000),
     "Apple": ("Apple", "Apple", 35, 1400),
-    "Global": ("Proxy", "Proxy", 100, 6500),
+    "Proxy": ("Proxy", "Proxy", 100, 6500),
 }
 
 
-def content_lines(text: str) -> list[str]:
+def lines(text: str) -> list[str]:
     return [s.strip() for s in text.splitlines() if s.strip() and not s.lstrip().startswith("#")]
 
 
-def read_upstream(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": "LoonRules-Merger/1.0"})
-    with urllib.request.urlopen(req, timeout=45) as res:
-        data = res.read().decode("utf-8-sig")
-    if not data or "<html" in data[:250].lower():
-        raise ValueError(f"Invalid upstream content: {url}")
-    return data
-
-
-def read_classical(text: str, label: str) -> list[str]:
-    result = content_lines(text)
+def validate_classical(text: str, label: str) -> list[str]:
+    result = lines(text)
     for item in result:
         parts = item.split(",")
         kind = parts[0]
-        if kind not in ALLOWED or len(parts) < 2 or not parts[1]:
-            raise ValueError(f"Invalid classical rule in {label}: {item!r}")
+        if kind not in ALLOWED_TYPES or len(parts) < 2 or not parts[1]:
+            raise ValueError(f"Invalid rule in {label}: {item!r}")
         if len(parts) != 2 and not (
-            len(parts) == 3
-            and kind in ("IP-CIDR", "IP-CIDR6")
+            len(parts) == 3 and kind in {"IP-CIDR", "IP-CIDR6"}
             and parts[2].lower() == "no-resolve"
         ):
-            raise ValueError(f"Unexpected policy/fields in {label}: {item!r}")
+            raise ValueError(f"Unsupported rule fields or policy in {label}: {item!r}")
     return result
+
+
+def read_local(file: str, minimum: int = 0) -> list[str]:
+    path = SOURCES / file
+    result = validate_classical(path.read_text(encoding="utf-8-sig"), file)
+    if len(result) < minimum:
+        raise ValueError(f"Local source {file} unexpectedly short: {len(result)}")
+    return result
+
+
+def download(url: str) -> str:
+    request = urllib.request.Request(url, headers={"User-Agent": "LoonRules-Builder/1.0"})
+    with urllib.request.urlopen(request, timeout=45) as res:
+        text = res.read().decode("utf-8-sig")
+    if not text or "<html" in text[:300].lower():
+        raise ValueError(f"Unexpected content returned for {url}")
+    return text
 
 
 def read_domain_set(text: str, label: str) -> list[str]:
     result = []
-    for item in content_lines(text):
-        domain = item[1:] if item.startswith(".") else item
-        if not DOMAIN.fullmatch(domain):
-            raise ValueError(f"Invalid DOMAIN-SET entry in {label}: {item!r}")
-        kind = "DOMAIN-SUFFIX" if item.startswith(".") else "DOMAIN"
+    for raw in lines(text):
+        domain = raw[1:] if raw.startswith(".") else raw
+        if not VALID_DOMAIN.fullmatch(domain):
+            raise ValueError(f"Invalid domain-set entry in {label}: {raw!r}")
+        kind = "DOMAIN-SUFFIX" if raw.startswith(".") else "DOMAIN"
         result.append(f"{kind},{domain.lower()}")
     return result
 
 
-def build_one(name: str, upstream_dir: str, upstream_name: str, min_classical: int, min_domains: int) -> str:
-    base = f"{UPSTREAM}/{upstream_dir}/{upstream_name}"
-    classical_url, domains_url = f"{base}.list", f"{base}_Domain.list"
-    classical = read_classical(read_upstream(classical_url), f"{name} classical")
-    domains = read_domain_set(read_upstream(domains_url), f"{name} domain-set")
-    if len(classical) < min_classical or len(domains) < min_domains:
-        raise ValueError(f"{name} upstream unexpectedly short: {len(classical)} + {len(domains)}")
+def fetch_pair(name: str) -> tuple[list[str], list[str], tuple[str, str]]:
+    directory, basename, min_classical, min_domainset = REMOTE[name]
+    base = f"{UPSTREAM}/{directory}/{basename}"
+    url_classical, url_domainset = f"{base}.list", f"{base}_Domain.list"
+    classical = validate_classical(download(url_classical), url_classical)
+    domainset = read_domain_set(download(url_domainset), url_domainset)
+    if len(classical) < min_classical or len(domainset) < min_domainset:
+        raise ValueError(
+            f"Incomplete {name} source: classical={len(classical)}, domains={len(domainset)}"
+        )
+    return classical, domainset, (url_classical, url_domainset)
 
-    additions_path = RULES / f"{name}_Custom.list"
-    additions = read_classical(additions_path.read_text(encoding="utf-8-sig"), f"{name} custom") if additions_path.exists() else []
 
-    merged = list(dict.fromkeys([*additions, *classical, *domains]))
-    expected = {
-        "China": ("DOMAIN-SUFFIX,qcc.com", "DOMAIN-SUFFIX,qichacha.com"),
-        "Apple": ("DOMAIN-SUFFIX,apple.com", "DOMAIN-SUFFIX,icloud.com"),
-        "Global": ("DOMAIN-SUFFIX,google.com", "DOMAIN-SUFFIX,youtube.com"),
-    }[name]
-    for item in expected:
-        if item not in merged:
-            raise ValueError(f"Critical {name} rule missing: {item}")
+def merged(*groups: list[str]) -> list[str]:
+    return list(dict.fromkeys(item for group in groups for item in group))
 
-    comment = [
-        f"# NAME: {name} (blackmatrix7 + custom)",
-        "# FORMAT: Loon classical rule subscription",
-        "# AUTO-GENERATED: do not edit; optional additions go in rules/<name>_Custom.list",
-        "# POLICY: Assign DIRECT/Proxy strategy in Loon, not in this file.",
-        f"# SOURCE: {classical_url}",
-        f"# SOURCE: {domains_url}",
-        f"# RULES: {len(merged)} (custom {len(additions)}, upstream {len(classical)} + {len(domains)})",
+
+def must_include(name: str, rules: list[str], required: tuple[str, ...]) -> None:
+    found = set(rules)
+    for rule in required:
+        if rule not in found:
+            raise ValueError(f"Missing required {name} rule: {rule}")
+
+
+def format_rules(name: str, rules: list[str], sources: list[str], policy: str) -> str:
+    header = [
+        f"# NAME: {name}",
+        "# FORMAT: Loon classical rules; one match per line without a policy",
+        f"# POLICY: {policy} (selected in the Loon subscription)",
+        "# AUTO-GENERATED: edit sources/*.list, not this file",
+        *[f"# SOURCE: {source}" for source in sources],
+        f"# RULES: {len(rules)}",
         "",
     ]
-    return "\n".join([*comment, *merged, ""])
+    return "\n".join([*header, *rules, ""])
+
+
+def build() -> dict[Path, str]:
+    china, china_domains, china_urls = fetch_pair("China")
+    apple, apple_domains, apple_urls = fetch_pair("Apple")
+    proxy, proxy_domains, proxy_urls = fetch_pair("Proxy")
+    direct_custom = read_local("Direct_Custom.list", 2)
+    overseas_custom = read_local("Overseas_Custom.list", 7)
+    utility = read_local("Overseas_Utility.list", 550)
+    us_ai = read_local("US_AI.list", 140)
+    us_finance = read_local("US_Finance.list", 130)
+
+    # The source text of Crypto is intentionally copied unmodified for old URLs.
+    crypto_text = (SOURCES / "Crypto.list").read_text(encoding="utf-8-sig")
+    crypto = validate_classical(crypto_text, "Crypto.list")
+    if len(crypto) < 190:
+        raise ValueError(f"Crypto source unexpectedly short: {len(crypto)}")
+
+    us = merged(us_ai, us_finance)
+    china_only = merged(direct_custom, china, china_domains)
+    direct = merged(direct_custom, china, china_domains, apple, apple_domains)
+    overseas = merged(overseas_custom, utility, proxy, proxy_domains)
+
+    must_include("US", us, ("DOMAIN-SUFFIX,openai.com", "DOMAIN-SUFFIX,bloomberg.com"))
+    must_include("Crypto", crypto, ("DOMAIN-SUFFIX,hyperliquid.xyz", "DOMAIN-SUFFIX,tradingview.com"))
+    must_include("China", china_only, (
+        "DOMAIN-SUFFIX,qcc.com", "DOMAIN-SUFFIX,qichacha.com",
+        "DOMAIN,sysdk.cl2009.com", "DOMAIN,analytics.oceanengine.com",
+    ))
+    must_include("Direct", direct, ("DOMAIN-SUFFIX,apple.com", "DOMAIN-SUFFIX,icloud.com"))
+    must_include("Overseas", overseas, ("DOMAIN-SUFFIX,github.com", "DOMAIN-SUFFIX,githubusercontent.com"))
+
+    outputs = {
+        OUTPUTS / "US.list": format_rules(
+            "US", us, ["sources/US_AI.list", "sources/US_Finance.list"], "US node"
+        ),
+        OUTPUTS / "Crypto.list": crypto_text,
+        OUTPUTS / "Direct.list": format_rules(
+            "Direct", direct, [
+                "sources/Direct_Custom.list", *china_urls, *apple_urls,
+            ], "DIRECT"
+        ),
+        OUTPUTS / "Overseas.list": format_rules(
+            "Overseas", overseas, [
+                "sources/Overseas_Custom.list", "sources/Overseas_Utility.list", *proxy_urls,
+            ], "Available (auto-testing)"
+        ),
+        # Keep the old China and Crypto subscription URLs working during migration.
+        LEGACY / "China.list": "\n".join([
+            "# NAME: China (blackmatrix7 + custom)",
+            "# FORMAT: Loon classical rule subscription",
+            "# POLICY: DIRECT (set in Loon subscription, not in this file)",
+            "# AUTO-GENERATED: deprecated alias; edit sources/Direct_Custom.list",
+            f"# SOURCE: {china_urls[0]}",
+            f"# SOURCE: {china_urls[1]}",
+            f"# RULES: {len(china_only)}",
+            "", *china_only, "",
+        ]),
+        LEGACY / "Crypto.list": crypto_text,
+    }
+    return outputs
 
 
 def main() -> None:
-    outputs = {}
-    for name, args in SETS.items():
-        outputs[RULES / f"{name}.list"] = build_one(name, *args)
-
-    # All source reads and validations must succeed before changing ANY file.
-    for path, new_text in outputs.items():
-        old_text = path.read_text(encoding="utf-8") if path.exists() else None
-        if new_text != old_text:
-            path.write_text(new_text, encoding="utf-8")
-            print(f"Updated {path.relative_to(ROOT)}")
-        else:
-            print(f"Unchanged {path.relative_to(ROOT)}")
+    # Validate all inputs before writing anything.
+    outputs = build()
+    for path, value in outputs.items():
+        if path.exists() and path.read_text(encoding="utf-8") == value:
+            print(f"Unchanged: {path.relative_to(ROOT)}")
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(value, encoding="utf-8")
+        print(f"Updated: {path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
