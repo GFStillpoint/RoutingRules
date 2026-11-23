@@ -4,7 +4,7 @@
 # AUTO-GENERATED: edit sources/*.list, not this file
 # SOURCE: sources/US_AI.list
 # SOURCE: sources/US_Finance.list
-# RULES: 514
+# RULES: 521
 
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,chatgpt.com
@@ -206,6 +206,13 @@ DOMAIN-SUFFIX,topazlabs.com
 DOMAIN-SUFFIX,hedra.com
 DOMAIN-SUFFIX,minimax.io
 DOMAIN-SUFFIX,haiper.ai
+DOMAIN-SUFFIX,cursor-cdn.com
+DOMAIN-SUFFIX,cursorvm.com
+DOMAIN,anysphere-binaries.s3.us-east-1.amazonaws.com
+DOMAIN,agent-stores.s3.us-east-1.amazonaws.com
+DOMAIN,agent-stores.s3.amazonaws.com
+DOMAIN,cursor.blob.core.windows.net
+DOMAIN,accounts.spacex.ai
 DOMAIN-SUFFIX,bloomberg.com
 DOMAIN-SUFFIX,bwbx.io
 DOMAIN-SUFFIX,bloomberglaw.com
