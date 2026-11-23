@@ -1,0 +1,13 @@
+# NAME: Overseas Custom
+# Site domains handled by the Overseas automatic-testing proxy strategy.
+# Keep GitHub Copilot endpoints in US_AI, not here.
+DOMAIN-SUFFIX,github.com
+DOMAIN-SUFFIX,githubusercontent.com
+DOMAIN-SUFFIX,githubassets.com
+DOMAIN-SUFFIX,github.io
+DOMAIN-SUFFIX,github.dev
+DOMAIN-SUFFIX,githubapp.com
+DOMAIN-SUFFIX,githubstatus.com
+DOMAIN-SUFFIX,github.blog
+DOMAIN-SUFFIX,github.community
+DOMAIN-SUFFIX,ghcr.io
