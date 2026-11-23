@@ -6,7 +6,7 @@
 # SOURCE: sources/Overseas_Utility.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy_Domain.list
-# RULES: 7546
+# RULES: 7538
 
 DOMAIN-SUFFIX,github.com
 DOMAIN-SUFFIX,githubusercontent.com
@@ -638,8 +638,6 @@ USER-AGENT,PayPal*
 USER-AGENT,Roam*
 USER-AGENT,WhatsApp*
 USER-AGENT,battleroyale*
-USER-AGENT,com.apple.trustd*
-USER-AGENT,hearthstone*
 IP-CIDR,1.201.0.0/24,no-resolve
 IP-CIDR,103.2.28.0/22,no-resolve
 IP-CIDR,103.246.56.0/22,no-resolve
@@ -1141,12 +1139,10 @@ DOMAIN-SUFFIX,app.heywire.com
 DOMAIN-SUFFIX,app.tutanota.com
 DOMAIN-SUFFIX,appadvice.com
 DOMAIN-SUFFIX,appdownloader.net
-DOMAIN-SUFFIX,apple-dns.net
 DOMAIN-SUFFIX,applecensorship.com
 DOMAIN-SUFFIX,appshopper.com
 DOMAIN-SUFFIX,appsocks.net
 DOMAIN-SUFFIX,appspot-preview.com
-DOMAIN-SUFFIX,appsto.re
 DOMAIN-SUFFIX,aptoide.com
 DOMAIN-SUFFIX,arcgis.com
 DOMAIN-SUFFIX,archive-it.org
@@ -1999,7 +1995,6 @@ DOMAIN-SUFFIX,cpj.org
 DOMAIN-SUFFIX,cpu-monkey.com
 DOMAIN-SUFFIX,cq99.us
 DOMAIN-SUFFIX,crackle.com
-DOMAIN-SUFFIX,crashlytics.com
 DOMAIN-SUFFIX,crazypool.org
 DOMAIN-SUFFIX,crazys.cc
 DOMAIN-SUFFIX,crazyshit.com
@@ -2180,7 +2175,6 @@ DOMAIN-SUFFIX,dhcp.biz
 DOMAIN-SUFFIX,diaoyuislands.org
 DOMAIN-SUFFIX,difangwenge.org
 DOMAIN-SUFFIX,dify.ai
-DOMAIN-SUFFIX,digicert.com
 DOMAIN-SUFFIX,digiland.tw
 DOMAIN-SUFFIX,digisfera.com
 DOMAIN-SUFFIX,digitalnomadsproject.org
@@ -3730,7 +3724,6 @@ DOMAIN-SUFFIX,itigerup.com
 DOMAIN-SUFFIX,itsaol.com
 DOMAIN-SUFFIX,itshidden.com
 DOMAIN-SUFFIX,itsky.it
-DOMAIN-SUFFIX,itun.es
 DOMAIN-SUFFIX,itweet.net
 DOMAIN-SUFFIX,iu45.com
 DOMAIN-SUFFIX,iuhrdf.org
@@ -5703,7 +5696,6 @@ DOMAIN-SUFFIX,sharpdaily.hk
 DOMAIN-SUFFIX,sharpdaily.tw
 DOMAIN-SUFFIX,shat-tibet.com
 DOMAIN-SUFFIX,shattered.io
-DOMAIN-SUFFIX,shazam.com
 DOMAIN-SUFFIX,sheet.new
 DOMAIN-SUFFIX,sheets.new
 DOMAIN-SUFFIX,sheikyermami.com
