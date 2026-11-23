@@ -139,8 +139,9 @@ def build() -> dict[Path, str]:
     # google.cn), because the China source contains DOMAIN-SUFFIX,cn.
     # Exact rules also present in Direct are removed from Overseas, preserving
     # their explicit DIRECT intent even when Overseas is listed first.
+    direct_keys = set(direct)
     overseas = [rule for rule in merged(overseas_custom, utility, proxy, proxy_domains)
-                if rule not in set(direct)]
+                if rule not in direct_keys]
 
     must_include("US", us, ("DOMAIN-SUFFIX,openai.com", "DOMAIN-SUFFIX,bloomberg.com"))
     must_include("Crypto", crypto, ("DOMAIN-SUFFIX,hyperliquid.xyz", "DOMAIN-SUFFIX,tradingview.com"))
