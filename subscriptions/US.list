@@ -1,6 +1,6 @@
 # NAME: US
 # FORMAT: Loon classical rules; one match per line without a policy
-# POLICY: US node (selected in the Loon subscription)
+# SUGGESTED POLICY: choose an appropriate client strategy; policy is assigned by the Loon client
 # AUTO-GENERATED: edit sources/*.list, not this file
 # SOURCE: sources/US_AI.list
 # SOURCE: sources/US_Finance.list

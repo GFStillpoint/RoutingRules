@@ -1,6 +1,6 @@
 # NAME: Direct
 # FORMAT: Loon classical rules; one match per line without a policy
-# POLICY: DIRECT (selected in the Loon subscription)
+# SUGGESTED POLICY: DIRECT; policy is assigned by the Loon client
 # AUTO-GENERATED: edit sources/*.list, not this file
 # SOURCE: sources/Direct_Custom.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/China/China.list

@@ -1,6 +1,6 @@
 # NAME: Overseas
 # FORMAT: Loon classical rules; one match per line without a policy
-# POLICY: Available (auto-testing) (selected in the Loon subscription)
+# SUGGESTED POLICY: choose an appropriate client strategy; policy is assigned by the Loon client
 # AUTO-GENERATED: edit sources/*.list, not this file
 # SOURCE: sources/Overseas_Custom.list
 # SOURCE: sources/Overseas_Utility.list
