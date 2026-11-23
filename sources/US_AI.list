@@ -1,9 +1,9 @@
-# NAME: AI
+# NAME: US_AI (AI services and related infrastructure)
 # FORMAT: Loon / Mihomo classical rules
 # Routing policy is selected by the client.
 # Rules are routing matches, not an endorsement of individual services.
 
-# OpenAI / ChatGPT / Codex (17)
+# OpenAI / ChatGPT / Codex
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chat.com
@@ -22,14 +22,14 @@ DOMAIN-SUFFIX,turn.livekit.cloud
 DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
 DOMAIN-SUFFIX,openaiassets.z19.web.core.windows.net
 
-# Anthropic Claude (5)
+# Anthropic Claude
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,clau.de
 DOMAIN-SUFFIX,claudeusercontent.com
 
-# Google Gemini / AI Studio / Gemini Notebook / Labs (28)
+# Google Gemini / AI Studio / Gemini Notebook / Labs
 DOMAIN-SUFFIX,gemini.google.com
 DOMAIN-SUFFIX,gemini.google
 DOMAIN-SUFFIX,gemini.gstatic.com
@@ -59,7 +59,7 @@ DOMAIN-SUFFIX,flow.google
 DOMAIN-SUFFIX,labs.google
 DOMAIN-SUFFIX,ai.google
 
-# Microsoft Copilot / GitHub Copilot (7)
+# Microsoft Copilot / GitHub Copilot
 DOMAIN-SUFFIX,copilot.com
 DOMAIN-SUFFIX,copilot.cloud.microsoft
 DOMAIN-SUFFIX,copilot.microsoft.com
@@ -68,7 +68,7 @@ DOMAIN-SUFFIX,githubcopilot.com
 DOMAIN-SUFFIX,api.githubcopilot.com
 DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com
 
-# AI search, assistants and autonomous agents (17)
+# AI search, assistants and autonomous agents
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,perplexity.com
 DOMAIN-SUFFIX,pplx.ai
@@ -87,7 +87,7 @@ DOMAIN-SUFFIX,phind.com
 DOMAIN-SUFFIX,felo.ai
 DOMAIN-SUFFIX,z.ai
 
-# Meta / Muse and connected services (25)
+# Meta / Muse and connected services
 DOMAIN-SUFFIX,meta.com
 DOMAIN-SUFFIX,meta.ai
 DOMAIN-SUFFIX,muse.ai
@@ -114,7 +114,7 @@ DOMAIN-SUFFIX,wa.me
 DOMAIN-SUFFIX,oculus.com
 DOMAIN-SUFFIX,oculuscdn.com
 
-# AI coding agents and app builders (12)
+# AI coding agents and app builders
 DOMAIN-SUFFIX,cursor.com
 DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,windsurf.com
@@ -128,7 +128,7 @@ DOMAIN-SUFFIX,trae.ai
 DOMAIN-SUFFIX,kiro.dev
 DOMAIN-SUFFIX,cognition.ai
 
-# Model APIs, aggregators and developer services (17)
+# Model APIs, aggregators and developer services
 DOMAIN-SUFFIX,openrouter.ai
 DOMAIN-SUFFIX,silkcompute.com
 DOMAIN-SUFFIX,huggingface.co
@@ -147,7 +147,7 @@ DOMAIN-SUFFIX,lepton.ai
 DOMAIN-SUFFIX,lmstudio.ai
 DOMAIN-SUFFIX,ollama.com
 
-# Image, audio and video AI (18)
+# Image, audio and video AI
 DOMAIN-SUFFIX,midjourney.com
 DOMAIN-SUFFIX,ideogram.ai
 DOMAIN-SUFFIX,runwayml.com
@@ -167,7 +167,7 @@ DOMAIN-SUFFIX,recraft.ai
 DOMAIN-SUFFIX,magnific.ai
 DOMAIN-SUFFIX,hailuoai.video
 
-# AI desktop clients and integrations (6)
+# AI desktop clients and integrations
 DOMAIN-SUFFIX,chatboxai.app
 DOMAIN-SUFFIX,cherry-ai.com
 DOMAIN-SUFFIX,jan.ai
@@ -175,3 +175,63 @@ DOMAIN-SUFFIX,jetbrains.ai
 DOMAIN-SUFFIX,grazie.ai
 DOMAIN-SUFFIX,grazie.aws.intellij.net
 
+
+# OpenAI first-party adjacent service hosts (official ChatGPT network guidance)
+# Exact hosts only: shared third-party root domains must NOT be broadly routed.
+DOMAIN,cdn.workos.com
+DOMAIN,forwarder.workos.com
+DOMAIN,frontend-apps-multi-region.workos.com
+DOMAIN,setup.workos.com
+DOMAIN,images.workoscdn.com
+DOMAIN,workos.imgix.net
+DOMAIN,js.intercomcdn.com
+DOMAIN,ct.sendgrid.net
+DOMAIN,o207216.ingest.sentry.io
+DOMAIN,o33249.ingest.sentry.io
+DOMAIN,rum.browser-intake-datadoghq.com
+
+# Gemini and Copilot service-specific auxiliary hosts
+# Do not proxy entire googleapis.com / gstatic.com / office.com namespaces.
+DOMAIN,optimizationguide-pa.googleapis.com
+DOMAIN,csp.withgoogle.com
+DOMAIN,substrate.office.com
+DOMAIN,substrate.svc.cloud.microsoft
+
+# Coding assistants: API, extension, authentication and delivery infrastructure
+DOMAIN-SUFFIX,cursorapi.com
+DOMAIN-SUFFIX,codeiumdata.com
+DOMAIN-SUFFIX,opencode.ai
+DOMAIN-SUFFIX,cline.bot
+DOMAIN-SUFFIX,roo-code.com
+DOMAIN-SUFFIX,continue.dev
+DOMAIN-SUFFIX,augmentcode.com
+DOMAIN-SUFFIX,tabnine.com
+DOMAIN-SUFFIX,ampcode.com
+DOMAIN-SUFFIX,warp.dev
+DOMAIN-SUFFIX,sourcegraph.com
+DOMAIN-SUFFIX,server.self-serve.windsurf.com
+
+# Model API platforms, hosts, inference and AI tools
+DOMAIN-SUFFIX,refuseless.com
+DOMAIN-SUFFIX,venice.ai
+DOMAIN-SUFFIX,abliteration.ai
+DOMAIN-SUFFIX,baseten.co
+DOMAIN-SUFFIX,modal.com
+DOMAIN-SUFFIX,beam.cloud
+DOMAIN-SUFFIX,runpod.io
+DOMAIN-SUFFIX,vast.ai
+DOMAIN-SUFFIX,lambda.ai
+DOMAIN-SUFFIX,anyscale.com
+DOMAIN-SUFFIX,hf.space
+DOMAIN-SUFFIX,replicate.delivery
+DOMAIN-SUFFIX,gradio.app
+DOMAIN-SUFFIX,huggingfaceusercontent.com
+
+# Additional AI audio, video and creative services
+DOMAIN-SUFFIX,descript.com
+DOMAIN-SUFFIX,play.ht
+DOMAIN-SUFFIX,fish.audio
+DOMAIN-SUFFIX,topazlabs.com
+DOMAIN-SUFFIX,hedra.com
+DOMAIN-SUFFIX,minimax.io
+DOMAIN-SUFFIX,haiper.ai
