@@ -599,3 +599,14 @@ DOMAIN-SUFFIX,verily.com
 DOMAIN-SUFFIX,waymo.com
 DOMAIN-SUFFIX,waze.com
 DOMAIN-SUFFIX,x.company
+
+# Additional Google delivery and Workspace entry domains
+DOMAIN-SUFFIX,gvt0.com
+DOMAIN-SUFFIX,gvt5.com
+DOMAIN-SUFFIX,gvt6.com
+DOMAIN-SUFFIX,gvt7.com
+DOMAIN-SUFFIX,gvt9.com
+DOMAIN-SUFFIX,docs.new
+DOMAIN-SUFFIX,sheets.new
+DOMAIN-SUFFIX,slides.new
+DOMAIN-SUFFIX,gsuite.com
