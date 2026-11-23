@@ -1,0 +1,56 @@
+name: Update Loon rule subscriptions
+
+on:
+  schedule:
+    # Daily at 00:17 UTC = 08:17 China Standard Time.
+    - cron: '17 0 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'sources/**'
+      - 'scripts/build_rules.py'
+      - '.github/workflows/update-rules.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-loon-subscriptions
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Fetch upstream and build all subscriptions
+        run: python3 scripts/build_rules.py
+
+      - name: Verify expected rules and ensure no raw domain-set syntax
+        shell: bash
+        run: |
+          for file in subscriptions/US.list subscriptions/Crypto.list subscriptions/Direct.list subscriptions/Overseas.list; do
+            test -s "$file"
+            ! grep -Eq '^\.' "$file"
+          done
+          grep -qx 'DOMAIN-SUFFIX,openai.com' subscriptions/US.list
+          grep -qx 'DOMAIN-SUFFIX,hyperliquid.xyz' subscriptions/Crypto.list
+          grep -qx 'DOMAIN-SUFFIX,qcc.com' subscriptions/Direct.list
+          grep -qx 'DOMAIN-SUFFIX,apple.com' subscriptions/Direct.list
+          grep -qx 'DOMAIN-SUFFIX,github.com' subscriptions/Overseas.list
+
+      - name: Commit changed generated files only
+        shell: bash
+        run: |
+          git add subscriptions/ rules/China.list rules/Crypto.list
+          if git diff --cached --quiet; then
+            echo "All generated subscriptions are up to date"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "chore: refresh Loon subscription lists"
+          git push
