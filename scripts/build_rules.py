@@ -135,7 +135,12 @@ def build() -> dict[Path, str]:
     us = merged(us_ai, us_finance)
     china_only = merged(direct_custom, china, china_domains)
     direct = merged(direct_custom, china, china_domains, apple, apple_domains)
-    overseas = merged(overseas_custom, utility, proxy, proxy_domains)
+    # Overseas should precede Direct for selected .cn exceptions (for example
+    # google.cn), because the China source contains DOMAIN-SUFFIX,cn.
+    # Exact rules also present in Direct are removed from Overseas, preserving
+    # their explicit DIRECT intent even when Overseas is listed first.
+    overseas = [rule for rule in merged(overseas_custom, utility, proxy, proxy_domains)
+                if rule not in set(direct)]
 
     must_include("US", us, ("DOMAIN-SUFFIX,openai.com", "DOMAIN-SUFFIX,bloomberg.com"))
     must_include("Crypto", crypto, ("DOMAIN-SUFFIX,hyperliquid.xyz", "DOMAIN-SUFFIX,tradingview.com"))
