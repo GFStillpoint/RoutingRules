@@ -1,0 +1,9 @@
+# NAME: China Custom Direct Rules
+# These are user-maintained additions to the merged China.list.
+# Keep one Loon rule per line, WITHOUT a policy suffix.
+# All entries in the generated China.list must be subscribed with policy DIRECT.
+# Do not edit the generated rules/China.list directly.
+
+# Qichacha third-party SDK hosts observed as FINAL -> Available in Loon HAR (2026-11-23)
+DOMAIN,sysdk.cl2009.com
+DOMAIN,analytics.oceanengine.com
