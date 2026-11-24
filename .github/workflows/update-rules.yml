@@ -1,4 +1,4 @@
-name: Update Loon rule subscriptions
+name: Update routing rule subscriptions
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
   push:
     paths:
       - 'sources/**'
-      - 'scripts/build_rules.py'
+      - 'scripts/**'
       - '.github/workflows/update-rules.yml'
 
 permissions:
@@ -21,7 +21,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Check out main
         uses: actions/checkout@v4
@@ -42,6 +42,30 @@ jobs:
           grep -qx 'DOMAIN-SUFFIX,apple.com' subscriptions/Direct.list
           grep -qx 'DOMAIN-SUFFIX,github.com' subscriptions/Overseas.list
 
+      - name: Install pinned sing-box compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=1.11.15
+          archive="sing-box-${version}-linux-amd64.tar.gz"
+          curl --fail --location --retry 3 --silent --show-error \
+            "https://github.com/SagerNet/sing-box/releases/download/v${version}/${archive}" \
+            -o "$RUNNER_TEMP/$archive"
+          echo "950af37eb2d7e55dddae34a18411cd617303fd99d2dc75bc76b6dd9fcd97d9c5  $RUNNER_TEMP/$archive" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP"
+          install -m 0755 "$RUNNER_TEMP/sing-box-${version}-linux-amd64/sing-box" "$RUNNER_TEMP/sing-box"
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: Generate and verify sing-box rule sets
+        shell: bash
+        run: |
+          sing-box version
+          python3 scripts/build_singbox.py
+          for name in US Crypto Overseas Direct; do
+            test -s "subscriptions/sing-box/$name.json"
+            test -s "subscriptions/sing-box/$name.srs"
+          done
+
       - name: Commit changed generated files only
         shell: bash
         run: |
@@ -52,5 +76,5 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "chore: refresh Loon subscription lists"
+          git commit -m "chore: refresh Loon and sing-box subscriptions"
           git push
