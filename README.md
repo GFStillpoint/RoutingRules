@@ -4,6 +4,35 @@ RoutingRules 是一个持续维护的网络分流规则集，按服务类型整�
 
 RoutingRules is a curated and continuously maintained collection of network routing rules. It organizes domain and IP rules by service category and publishes subscription files in formats for different clients.
 
+## 架构 / Architecture
+
+统一整理规则，按客户端格式发布。上游来源与自定义规则独立维护，辅助插件按客户端归类。 / Rules are processed centrally and published in client-specific formats. Upstream sources and custom rules are maintained separately; utilities are organized by client.
+
+```mermaid
+flowchart TD
+    A["上游来源 / Upstream<br/>sources/upstream/"] --> C
+    B["自定义规则 / Custom<br/>sources/custom/"] --> C
+    C["统一整理 / Rule processing<br/>build_rules.py"] --> D["分类规则 / Rule categories<br/>US · Crypto · Overseas · Direct"]
+    D --> E["Loon exporter<br/>build_loon.py"]
+    D --> F["sing-box exporter<br/>build_singbox.py"]
+    E --> G["LIST"]
+    F --> H["JSON"]
+    H --> I["SRS"]
+    G --> J["Loon"]
+    H --> K["Karing / sing-box"]
+    I --> K
+    P["辅助插件 / Plugins<br/>plugins/loon/"] --> J
+    W["GitHub Actions<br/>每日更新 / Daily update"] -.-> C
+    classDef source fill:#e8eff8,stroke:#7293bc,color:#20334d
+    classDef process fill:#e8f3ee,stroke:#61977d,color:#203c30
+    classDef format fill:#f3f0e9,stroke:#a99a77,color:#413a2a
+    classDef client fill:#e9e7f5,stroke:#9081b9,color:#352d50
+    class A,B,P source
+    class C,D,E,F process
+    class G,H,I format
+    class J,K client
+```
+
 ## 规则分类 / Rule Categories
 
 | 分类 / Category | 内容 / Coverage |
