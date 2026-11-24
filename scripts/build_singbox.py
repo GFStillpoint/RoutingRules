@@ -56,6 +56,16 @@ def convert(name, records):
     return {"version": 2, "rules": blocks}
 
 
+def export(records, output_dir: Path) -> dict[Path, str]:
+    """Render sing-box JSON from the same records used by other exporters."""
+    return {
+        output_dir / f"{name}.json": json.dumps(
+            convert(name, rules), indent=2, ensure_ascii=False
+        ) + "\n"
+        for name, rules in records.items()
+    }
+
+
 def main():
     for name in NAMES:
         source = OUTPUT / f"{name}.json"
