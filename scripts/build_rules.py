@@ -6,12 +6,14 @@ from pathlib import Path
 import json
 import build_loon
 import build_singbox
+import check_conflicts
 import re
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "sources" / "custom"
 OUTPUTS = ROOT / "subscriptions"
+REPORTS = ROOT / "reports"
 MANIFEST = ROOT / "sources" / "upstream" / "sources.json"
 ALLOWED_TYPES = {
     "DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "USER-AGENT",
@@ -108,19 +110,17 @@ def build() -> dict[Path, str]:
     }
     minimums = {
         "US_AI.list": 195, "US_Google.list": 570, "US_Finance.list": 300,
-        "Crypto.list": 190, "Direct.list": 100, "Overseas.list": 20,
+        "Crypto.list": 350, "Direct.list": 100, "Overseas.list": 20,
     }
     records = {
         name: merged(*(read_local(file, minimums[file]) for file in files),
                      upstream.get(name, []))
         for name, files in local.items()
     }
+    records, conflict_report = check_conflicts.analyze(records)
     us = records["US"]
     crypto = records["Crypto"]
     direct = records["Direct"]
-    # Preserve existing precedence and remove exact overlaps with US and Direct.
-    excluded = set(us) | set(direct)
-    records["Overseas"] = [rule for rule in records["Overseas"] if rule not in excluded]
     overseas = records["Overseas"]
 
     must_include("US", us, (
@@ -153,6 +153,8 @@ def build() -> dict[Path, str]:
     }
     outputs = build_loon.export(records, provenance, OUTPUTS / "loon")
     outputs.update(build_singbox.export(records, OUTPUTS / "sing-box"))
+    outputs[REPORTS / "conflicts.json"] = check_conflicts.render_json(conflict_report)
+    outputs[REPORTS / "conflicts.md"] = check_conflicts.render_markdown(conflict_report)
     return outputs
 
 

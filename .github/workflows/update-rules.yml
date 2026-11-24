@@ -67,15 +67,22 @@ jobs:
             test -s "subscriptions/sing-box/$name.srs"
           done
 
+      - name: Verify conflict reports
+        shell: bash
+        run: |
+          test -s reports/conflicts.json
+          test -s reports/conflicts.md
+          python3 -m json.tool reports/conflicts.json > /dev/null
+
       - name: Commit changed generated files only
         shell: bash
         run: |
-          git add subscriptions/
+          git add subscriptions/ reports/
           if git diff --cached --quiet; then
             echo "All generated subscriptions are up to date"
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "chore: refresh routing rule subscriptions"
+          git commit -m "chore: refresh routing rule subscriptions and reports"
           git push
