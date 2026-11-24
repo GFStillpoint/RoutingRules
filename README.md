@@ -8,40 +8,7 @@ RoutingRules is a curated and continuously maintained collection of network rout
 
 统一整理规则，按客户端格式发布。上游来源与自定义规则独立维护，特定网络场景的规则扩展以客户端插件形式提供。 / Rules are processed centrally and published in client-specific formats. Upstream sources and custom rules are maintained separately; specialized network rules are provided as client-specific plugins.
 
-```mermaid
-flowchart TD
-    A["上游来源 / Upstream<br/>sources/upstream/"] --> C
-    B["自定义规则 / Custom<br/>sources/custom/"] --> C
-    C["统一整理 / Rule processing<br/>build_rules.py"] --> Q["规则质量检测 / Conflict check<br/>check_conflicts.py"]
-    Q --> D
-    Q -.-> R["冲突报告 / Reports<br/>reports/"]
-    subgraph D["分类规则 / Rule categories"]
-        direction LR
-        US["US"]
-        CR["Crypto"]
-        OS["Overseas"]
-        DI["Direct"]
-    end
-    D --> E["Loon exporter<br/>build_loon.py"]
-    D --> F["sing-box exporter<br/>build_singbox.py"]
-    E --> G["LIST"]
-    F --> H["JSON"]
-    H --> I["SRS"]
-    G --> J["Loon"]
-    H --> K["sing-box compatible clients<br/>e.g. Karing"]
-    I --> K
-    P["本地回环规则 / Local loopback<br/>plugins/loon/"] --> J
-    W["GitHub Actions<br/>每日更新 / Daily update"] -.-> C
-    classDef source fill:#e8eff8,stroke:#7293bc,color:#20334d
-    classDef process fill:#e8f3ee,stroke:#61977d,color:#203c30
-    classDef format fill:#f3f0e9,stroke:#a99a77,color:#413a2a
-    classDef client fill:#e9e7f5,stroke:#9081b9,color:#352d50
-    class A,B,P source
-    class C,Q,US,CR,OS,DI,E,F process
-    class R format
-    class G,H,I format
-    class J,K client
-```
+![RoutingRules architecture / 项目架构](assets/architecture.svg)
 
 ## 规则分类 / Rule Categories
 
@@ -60,10 +27,10 @@ Choose the format for your client, copy its URL into a remote rule or rule set, 
 
 | 分类 / Category | Loon (LIST) | sing-box (SRS) | sing-box (JSON) |
 | --- | --- | --- | --- |
-| US | [US.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/US.list) | [US.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/US.srs) | [US.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/US.json) |
-| Crypto | [Crypto.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/Crypto.list) | [Crypto.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Crypto.srs) | [Crypto.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Crypto.json) |
-| Overseas | [Overseas.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/Overseas.list) | [Overseas.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Overseas.srs) | [Overseas.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Overseas.json) |
-| Direct | [Direct.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/Direct.list) | [Direct.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Direct.srs) | [Direct.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Direct.json) |
+| US | [US.list](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/loon/US.list) | [US.srs](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/US.srs) | [US.json](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/US.json) |
+| Crypto | [Crypto.list](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/loon/Crypto.list) | [Crypto.srs](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/Crypto.srs) | [Crypto.json](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/Crypto.json) |
+| Overseas | [Overseas.list](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/loon/Overseas.list) | [Overseas.srs](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/Overseas.srs) | [Overseas.json](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/Overseas.json) |
+| Direct | [Direct.list](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/loon/Direct.list) | [Direct.srs](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/Direct.srs) | [Direct.json](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/subscriptions/sing-box/Direct.json) |
 
 ### 快速开始 / Quick Start
 
@@ -87,7 +54,7 @@ Exact duplicates of specialized rules are removed from general rule sets during 
 
 | 客户端 / Client | 插件 / Plugin | 功能 / Features |
 | --- | --- | --- |
-| Loon | [Device Loopback](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/plugins/loon/Device_Loopback.plugin) | 通过 Loon 处理本地开发服务的回环连接，使兼容的 iOS 开发工具能够在使用 Loon 时访问本地服务，避免为此反复切换 LocalDevVPN。 / Handles local development loopback traffic through Loon, allowing compatible iOS development tools to access local services without repeatedly switching to LocalDevVPN. |
+| Loon | [Device Loopback](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/plugins/loon/Device_Loopback.plugin) | 通过 Loon 处理本地开发服务的回环连接，使兼容的 iOS 开发工具能够在使用 Loon 时访问本地服务，避免为此反复切换 LocalDevVPN。 / Handles local development loopback traffic through Loon, allowing compatible iOS development tools to access local services without repeatedly switching to LocalDevVPN. |
 
 在 Loon 的插件页面添加对应链接即可使用。 / Add the plugin URL in Loon's plugin settings.
 
@@ -107,6 +74,7 @@ Exact duplicates of specialized rules are removed from general rule sets during 
 | [scripts/](scripts/) | 统一规则整理及各格式生成 / Shared rule processing and format-specific exporters |
 | [plugins/](plugins/) | 客户端规则扩展 / Client-specific rule plugins |
 | [reports/](reports/) | 规则质量检测报告 / Rule quality reports |
+| [assets/](assets/) | 项目文档图示 / Documentation diagrams |
 | [.github/workflows/](.github/workflows/) | 自动更新与发布 / Automated updates and publishing |
 
 基础规则来源包括 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，并结合本项目维护的服务域名。 / Base rules draw on [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script), supplemented by curated service domains.
