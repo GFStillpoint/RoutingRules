@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 import json
-from build_singbox import convert
+import build_loon
+import build_singbox
 import re
 import urllib.request
 
@@ -97,19 +98,6 @@ def must_include(name: str, rules: list[str], required: tuple[str, ...]) -> None
             raise ValueError(f"Missing required {name} rule: {rule}")
 
 
-def format_rules(name: str, rules: list[str], sources: list[str], policy: str) -> str:
-    header = [
-        f"# NAME: {name}",
-        "# FORMAT: Loon classical rules; one match per line without a policy",
-        f"# SUGGESTED POLICY: {policy}; policy is assigned by the Loon client",
-        "# AUTO-GENERATED: edit sources/custom/*.list, not this file",
-        *[f"# SOURCE: {source}" for source in sources],
-        f"# RULES: {len(rules)}",
-        "",
-    ]
-    return "\n".join([*header, *rules, ""])
-
-
 def build() -> dict[Path, str]:
     upstream, urls = fetch_upstream()
     local = {
@@ -159,16 +147,12 @@ def build() -> dict[Path, str]:
         "DOMAIN,analytics.oceanengine.com",
     ))
 
-    outputs = {}
-    for name, rules in records.items():
-        provenance = [f"sources/custom/{file}" for file in local[name]] + urls.get(name, [])
-        policy = "DIRECT" if name == "Direct" else "client-selected strategy"
-        outputs[OUTPUTS / "loon" / f"{name}.list"] = format_rules(
-            name, rules, provenance, policy
-        )
-        outputs[OUTPUTS / "sing-box" / f"{name}.json"] = json.dumps(
-            convert(name, rules), indent=2, ensure_ascii=False
-        ) + "\n"
+    provenance = {
+        name: [f"sources/custom/{file}" for file in files] + urls.get(name, [])
+        for name, files in local.items()
+    }
+    outputs = build_loon.export(records, provenance, OUTPUTS / "loon")
+    outputs.update(build_singbox.export(records, OUTPUTS / "sing-box"))
     return outputs
 
 
