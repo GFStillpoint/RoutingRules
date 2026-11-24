@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 680" role="img" aria-labelledby="title desc">
+  <title id="title">RoutingRules architecture / 项目架构</title>
+  <desc id="desc">Upstream and custom rules are processed and checked, organized into specialized and general categories, and exported as Loon LIST and sing-box JSON and SRS. GitHub Actions triggers the build; conflict reports and local loopback plugins are independent outputs or extensions.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 8 4 0 8z" fill="#748397"/>
+    </marker>
+    <style>
+      text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;text-anchor:middle;fill:#25364a}
+      .primary{font-size:17px;font-weight:650}
+      .secondary{font-size:12px;fill:#536579}
+      .rule{font-size:15px;font-weight:650}
+      .node{stroke-width:1.3;rx:9}
+      .source{fill:#edf3fb;stroke:#9bb3d0}
+      .process{fill:#e9f3ef;stroke:#8aaf9d}
+      .format{fill:#f4f0e7;stroke:#c1b28d}
+      .client{fill:#eeedf7;stroke:#ada5ce}
+      .side{fill:#f1f4f8;stroke:#b1bdcd}
+      .group{fill:#f4f7fa;stroke:#c3cedb;stroke-width:1.2;rx:10}
+      .link{fill:none;stroke:#748397;stroke-width:1.5;stroke-linejoin:round}
+      .arrow{marker-end:url(#arrow)}
+      .dashed{stroke-dasharray:5 4}
+    </style>
+  </defs>
+  <rect x="1" y="1" width="938" height="678" rx="16" fill="#ffffff" stroke="#d9e1ea"/>
+
+  <!-- Connections: aligned shared pipeline, then two parallel format branches. -->
+  <g class="link">
+    <path d="M345 82 V98 H470 M595 82 V98 H470"/>
+    <path class="arrow" d="M470 98 V117"/>
+    <path class="arrow dashed" d="M236 149 H300"/>
+    <path class="arrow" d="M470 181 V206"/>
+    <path class="arrow dashed" d="M640 238 H704"/>
+    <path d="M470 270 V289 H330 V307 M470 289 H610 V307" marker-end="none"/>
+    <path class="arrow" d="M330 289 V307"/>
+    <path class="arrow" d="M610 289 V307"/>
+    <path d="M330 403 V423 H610 V403"/>
+    <path class="arrow" d="M330 423 V448"/>
+    <path class="arrow" d="M610 423 V448"/>
+    <path class="arrow" d="M330 512 V535"/>
+    <path class="arrow" d="M610 512 V535"/>
+    <path class="arrow" d="M330 571 V603"/>
+    <path class="arrow" d="M610 571 V603"/>
+    <path class="arrow dashed" d="M182 628 H210"/>
+  </g>
+
+  <!-- Sources -->
+  <rect class="node source" x="240" y="24" width="210" height="58"/>
+  <rect class="node source" x="490" y="24" width="210" height="58"/>
+  <text class="primary" x="345" y="47">上游来源 / Upstream</text>
+  <text class="secondary" x="345" y="66">sources/upstream/</text>
+  <text class="primary" x="595" y="47">自定义规则 / Custom</text>
+  <text class="secondary" x="595" y="66">sources/custom/</text>
+
+  <!-- Build and quality -->
+  <rect class="node side" x="26" y="117" width="210" height="64"/>
+  <text class="primary" x="131" y="142">GitHub Actions</text>
+  <text class="secondary" x="131" y="163">每日构建 / Daily build</text>
+  <rect class="node process" x="300" y="117" width="340" height="64"/>
+  <text class="primary" x="470" y="142">统一整理 / Rule processing</text>
+  <text class="secondary" x="470" y="163">build_rules.py</text>
+  <rect class="node process" x="300" y="206" width="340" height="64"/>
+  <text class="primary" x="470" y="231">规则质量检测 / Conflict check</text>
+  <text class="secondary" x="470" y="252">check_conflicts.py</text>
+  <rect class="node side" x="704" y="206" width="210" height="64"/>
+  <text class="primary" x="809" y="231">冲突报告 / Reports</text>
+  <text class="secondary" x="809" y="252">reports/ · JSON / Markdown</text>
+
+  <!-- Two rule tiers, each with two equal independent categories -->
+  <rect class="group" x="204" y="307" width="252" height="96"/>
+  <rect class="group" x="484" y="307" width="252" height="96"/>
+  <text class="secondary" x="330" y="332">专项规则 / Specialized</text>
+  <text class="secondary" x="610" y="332">基础规则 / General</text>
+  <rect class="node source" x="220" y="345" width="104" height="42"/>
+  <rect class="node source" x="336" y="345" width="104" height="42"/>
+  <rect class="node side" x="500" y="345" width="104" height="42"/>
+  <rect class="node side" x="616" y="345" width="104" height="42"/>
+  <text class="rule" x="272" y="372">US</text>
+  <text class="rule" x="388" y="372">Crypto</text>
+  <text class="rule" x="552" y="372">Overseas</text>
+  <text class="rule" x="668" y="372">Direct</text>
+
+  <!-- Exporters -->
+  <rect class="node process" x="210" y="448" width="240" height="64"/>
+  <rect class="node process" x="490" y="448" width="240" height="64"/>
+  <text class="primary" x="330" y="473">Loon exporter</text>
+  <text class="secondary" x="330" y="494">build_loon.py</text>
+  <text class="primary" x="610" y="473">sing-box exporter</text>
+  <text class="secondary" x="610" y="494">build_singbox.py</text>
+
+  <!-- Published formats -->
+  <rect class="node format" x="210" y="535" width="240" height="36"/>
+  <rect class="node format" x="490" y="535" width="240" height="36"/>
+  <text class="rule" x="330" y="558">LIST</text>
+  <text class="rule" x="610" y="558">JSON / SRS</text>
+
+  <!-- Client examples and independent extension -->
+  <rect class="node side" x="22" y="603" width="160" height="50"/>
+  <text class="rule" x="102" y="623">本地回环 / Loopback</text>
+  <text class="secondary" x="102" y="641">plugins/loon/</text>
+  <rect class="node client" x="210" y="603" width="240" height="50"/>
+  <rect class="node client" x="490" y="603" width="240" height="50"/>
+  <text class="primary" x="330" y="633">Loon</text>
+  <text class="primary" x="610" y="623">sing-box clients</text>
+  <text class="secondary" x="610" y="641">例如 / e.g. Karing</text>
+</svg>
