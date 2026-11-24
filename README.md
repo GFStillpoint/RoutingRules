@@ -12,7 +12,14 @@ RoutingRules is a curated and continuously maintained collection of network rout
 flowchart TD
     A["上游来源 / Upstream<br/>sources/upstream/"] --> C
     B["自定义规则 / Custom<br/>sources/custom/"] --> C
-    C["统一整理 / Rule processing<br/>build_rules.py"] --> D["分类规则 / Rule categories<br/>US · Crypto · Overseas · Direct"]
+    C["统一整理 / Rule processing<br/>build_rules.py"] --> D
+    subgraph D["分类规则 / Rule categories"]
+        direction LR
+        US["US"]
+        CR["Crypto"]
+        OS["Overseas"]
+        DI["Direct"]
+    end
     D --> E["Loon exporter<br/>build_loon.py"]
     D --> F["sing-box exporter<br/>build_singbox.py"]
     E --> G["LIST"]
@@ -28,7 +35,7 @@ flowchart TD
     classDef format fill:#f3f0e9,stroke:#a99a77,color:#413a2a
     classDef client fill:#e9e7f5,stroke:#9081b9,color:#352d50
     class A,B,P source
-    class C,D,E,F process
+    class C,US,CR,OS,DI,E,F process
     class G,H,I format
     class J,K client
 ```
