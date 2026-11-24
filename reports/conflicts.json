@@ -1,0 +1,3030 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-24T05:22:32+00:00",
+  "rule_counts": {
+    "US": {
+      "before": 1106,
+      "after": 1106
+    },
+    "Crypto": {
+      "before": 375,
+      "after": 375
+    },
+    "Overseas": {
+      "before": 7017,
+      "after": 6810
+    },
+    "Direct": {
+      "before": 5390,
+      "after": 5387
+    }
+  },
+  "removed_duplicates": [
+    {
+      "rule": "DOMAIN-KEYWORD,1e100",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-KEYWORD,blogspot",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-KEYWORD,gmail",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-KEYWORD,google",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-KEYWORD,youtube",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,9news.com.au",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,aave.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,abc.net.au",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,abc.xyz",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,admob.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,adsense.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,afr.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,aljazeera.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,aljazeera.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,android.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,androidify.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,androidtv.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,ap.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,app-measurement.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,appspot.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,arstechnica.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,asiaone.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,axios.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bangkokpost.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bbc.co.uk",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bbc.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bbci.co.uk",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,big.one",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,binance.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,binance.us",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bitfinex.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bitget.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bithumb.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,blogblog.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,blogger.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bloomberg.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,brookings.edu",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,businessinsider.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bwbx.io",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,bybit.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cbc.ca",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cbsnews.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cerebras.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cex.io",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,channelnewsasia.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,character.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,chat.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,chosun.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,chrome.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,chromecast.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,chromeexperiments.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,chromestatus.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,chromium.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,civitai.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,claude.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cloudfunctions.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cmegroup.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cnet.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,cnn.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,coinbase.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,coinex.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,coingecko.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,coinmarketcap.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,crbug.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,crrev.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,dailymail.co.uk",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,deepmind.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,docs.new",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,dowjones.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,dowjones.io",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,dw.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,dw.de",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,economist.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,elpais.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,engadget.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,etherscan.io",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,euronews.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,faz.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,fb.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,fb.me",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,fb.watch",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,fbsbx.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,feedburner.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,firebaseio.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,fish.audio",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,focustaiwan.tw",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,forbes.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,foreignaffairs.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,foreignpolicy.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,ft.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,g.co",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gate.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gate.io",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gcr.io",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,ggpht.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gmgn.ai",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,golang.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,goo.gl",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,grok.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gstatic.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gvt0.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gvt1.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,gvt3.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,hitbtc.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,htx.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,huggingface.co",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,imf.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,independent.co.uk",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,infura.io",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,investing.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,jan.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,japantimes.co.jp",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,jiji.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,keyhole.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,kraken.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,kucoin.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,ledger.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,lemonde.fr",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,leonardo.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,m.me",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,manus.im",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,marketwatch.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,material.io",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,messenger.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,meta.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,meta.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,metaaivm.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,metamask.io",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,mistral.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,msn.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,muse.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nationthailand.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nature.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nbcnews.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,newsweek.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,newyorker.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nikkei.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nyt.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nytco.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nytimes.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,nytimg.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,oculus.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,oculuscdn.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,oklink.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,okx.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,opensea.io",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,page.link",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,pancakeswap.finance",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,pbs.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,perplexity.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,plus.codes",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,poe.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,poloniex.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,polymarket.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,recaptcha.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,restofworld.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,reuters.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,reutersmedia.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,rfi.fr",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,sbs.com.au",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,scmp.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,sheets.new",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,slides.new",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,smh.com.au",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,snapseed.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,solana.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,solscan.io",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,sourcegraph.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,straitstimes.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,suno.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,swissinfo.ch",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,taipeitimes.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,techcrunch.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,telegraph.co.uk",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,tensorflow.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,tfhub.dev",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,theatlantic.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,theaustralian.com.au",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,theconversation.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,theguardian.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,theintercept.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,theverge.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,threads.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,threads.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,time.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,tradingview.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,tronscan.org",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,trustwallet.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,uniswap.org",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,upbit.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,vox-cdn.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,walletconnect.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,walletconnect.org",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,washingtonpost.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,waymo.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,web.dev",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,worldbank.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,wsj.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,wsj.net",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,x.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,x.company",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,xt.com",
+      "kept_in": [
+        "Crypto"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,yahoo.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,yimg.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,yomiuri.co.jp",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,you.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,youtu.be",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,yt.be",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,ytimg.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,zerohedge.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    }
+  ],
+  "retained_exact_duplicates": [
+    {
+      "rule": "DOMAIN-SUFFIX,apple-dns.net",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,appsto.re",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,crashlytics.com",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,digicert.com",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,itun.es",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,shazam.com",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    },
+    {
+      "rule": "USER-AGENT,com.apple.trustd*",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    },
+    {
+      "rule": "USER-AGENT,hearthstone*",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ]
+    }
+  ],
+  "range_overlaps": [
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Crypto"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,coindesk.com",
+        "DOMAIN,data.coindesk.com"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,cdninstagram.com",
+        "DOMAIN-KEYWORD,instagram"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,facebook.com",
+        "DOMAIN-KEYWORD,facebook"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,facebook.net",
+        "DOMAIN-KEYWORD,facebook"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,fbcdn.net",
+        "DOMAIN-KEYWORD,fbcdn"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,instagram.com",
+        "DOMAIN-KEYWORD,instagram"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,whatsapp.com",
+        "DOMAIN-KEYWORD,whatsapp"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,whatsapp.net",
+        "DOMAIN-KEYWORD,whatsapp"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,agent-stores.s3.amazonaws.com",
+        "DOMAIN-SUFFIX,amazonaws.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,agent-stores.s3.us-east-1.amazonaws.com",
+        "DOMAIN-SUFFIX,amazonaws.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,anysphere-binaries.s3.us-east-1.amazonaws.com",
+        "DOMAIN-SUFFIX,amazonaws.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,koreajoongangdaily.joins.com",
+        "DOMAIN-SUFFIX,joins.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,abcnews.go.com",
+        "DOMAIN-SUFFIX,go.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com",
+        "DOMAIN-SUFFIX,githubusercontent.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,copilot.microsoft.com",
+        "DOMAIN-SUFFIX,microsoft.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,designer.microsoft.com",
+        "DOMAIN-SUFFIX,microsoft.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,ecb.europa.eu",
+        "DOMAIN-SUFFIX,europa.eu"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,news.ycombinator.com",
+        "DOMAIN-SUFFIX,ycombinator.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,oaiusercontent.com",
+        "DOMAIN-SUFFIX,files.oaiusercontent.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,openai.com",
+        "DOMAIN-SUFFIX,chat.openai.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,openaiapi-site.azureedge.net",
+        "DOMAIN-SUFFIX,azureedge.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,production-openaicom-storage.azureedge.net",
+        "DOMAIN-SUFFIX,azureedge.net"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,substrate.svc.cloud.microsoft",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,copilot.cloud.microsoft",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,copilot.microsoft.com",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,designer.microsoft.com",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,cursor.blob.core.windows.net",
+        "DOMAIN-SUFFIX,windows.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,substrate.office.com",
+        "DOMAIN-SUFFIX,office.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,ggpht.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,google.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,google.ms",
+        "DOMAIN-SUFFIX,ms"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,googleapis.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,googlecnapps.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,gstatic.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,lat.ms",
+        "DOMAIN-SUFFIX,ms"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,openaiassets.z19.web.core.windows.net",
+        "DOMAIN-SUFFIX,windows.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net",
+        "DOMAIN-SUFFIX,windows.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Crypto",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,binance-docs.github.io",
+        "DOMAIN-SUFFIX,github.io"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Crypto",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,bingx-api.github.io",
+        "DOMAIN-SUFFIX,github.io"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Crypto",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,bybit-exchange.github.io",
+        "DOMAIN-SUFFIX,github.io"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Crypto",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,coins-docs.github.io",
+        "DOMAIN-SUFFIX,github.io"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Crypto",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,huobiapi.github.io",
+        "DOMAIN-SUFFIX,github.io"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Crypto",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,hyperliquid.gitbook.io",
+        "DOMAIN-SUFFIX,gitbook.io"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Crypto",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN,phemex-docs.github.io",
+        "DOMAIN-SUFFIX,github.io"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,login.microsoftonline.com",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,testflight.apple.com",
+        "DOMAIN-KEYWORD,testflight"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-KEYWORD,porn",
+        "DOMAIN-SUFFIX,empornium.me"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,baidu.jp",
+        "DOMAIN-KEYWORD,baidu"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoft-falcon.io",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoft.com",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoftapp.net",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoftpersonalcontent.com",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_keyword",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsofttranslator.com",
+        "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,cloud.oracle.com",
+        "DOMAIN-SUFFIX,oracle.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,cvws.icloud-content.com",
+        "DOMAIN-SUFFIX,icloud-content.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,developer.apple.com",
+        "DOMAIN-SUFFIX,apple.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,login.microsoftonline.com",
+        "DOMAIN-SUFFIX,microsoftonline.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,testflight.apple.com",
+        "DOMAIN-SUFFIX,apple.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,akamaihd.net",
+        "DOMAIN,blzddist1-a.akamaihd.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,akamaihd.net",
+        "DOMAIN,origin-a.akamaihd.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,akamaihd.net",
+        "DOMAIN,steamcommunity-a.akamaihd.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,blobstore.apple.com",
+        "DOMAIN-SUFFIX,apple.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,bx.in.th",
+        "DOMAIN-SUFFIX,in.th"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,c.mi.com",
+        "DOMAIN-SUFFIX,mi.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,cdn.angruo.com",
+        "DOMAIN,cdn.angruo.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,content.office.net",
+        "DOMAIN-SUFFIX,office.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,crisp.chat",
+        "DOMAIN-SUFFIX,api.crisp.chat"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,edgekey.net",
+        "DOMAIN,lookup-api.apple.com.edgekey.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,edgekey.net",
+        "DOMAIN-SUFFIX,gsp4-cn.ls.apple.com.edgekey.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,edgekey.net",
+        "DOMAIN-SUFFIX,itunes.com.edgekey.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,edgekey.net",
+        "DOMAIN-SUFFIX,store.apple.com.edgekey.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,edgekey.net",
+        "DOMAIN-SUFFIX,www.apple.com.edgekey.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,edgesuite.net",
+        "DOMAIN-SUFFIX,appldnld.apple.com.edgesuite.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,edgesuite.net",
+        "DOMAIN-SUFFIX,ls.apple.com.edgesuite.net"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,futu.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,futubull.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,gfx.ms",
+        "DOMAIN-SUFFIX,ms"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,go.sony.com",
+        "DOMAIN-SUFFIX,sony.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,longportapp.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoft.com",
+        "DOMAIN,download.microsoft.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoft.com",
+        "DOMAIN,ntservicepack.microsoft.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoft.com",
+        "DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoft.com",
+        "DOMAIN-SUFFIX,update.microsoft.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,microsoft.com",
+        "DOMAIN-SUFFIX,windowsupdate.microsoft.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,nyti.ms",
+        "DOMAIN-SUFFIX,ms"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,openapi-quote.longbridge.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,openapi-trade.longbridge.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,openapi.longbridge.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,schwab.com.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,sfx.ms",
+        "DOMAIN-SUFFIX,ms"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,shortconn.im.qcloud.com",
+        "DOMAIN-SUFFIX,qcloud.com"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,sina.com.hk",
+        "DOMAIN-SUFFIX,adimages.sina.com.hk"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,sina.com.hk",
+        "DOMAIN-SUFFIX,oascentral.sina.com.hk"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,tigerbbs.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,zhijianfengyi.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "ip_network",
+      "categories": [
+        "Overseas",
+        "Direct"
+      ],
+      "rules": [
+        "IP-CIDR,17.252.156.0/23,no-resolve",
+        "IP-CIDR,17.0.0.0/8,no-resolve"
+      ]
+    }
+  ]
+}
