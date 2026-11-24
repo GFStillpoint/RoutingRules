@@ -57,7 +57,7 @@ Choose the format for your client, copy its URL into a remote rule or rule set, 
 | [sources/upstream/](sources/upstream/) | 上游来源配置 / Upstream source registry |
 | [sources/custom/](sources/custom/) | 自定义规则 / Curated custom rules |
 | [subscriptions/](subscriptions/) | 按客户端格式发布的规则 / Client-specific subscriptions |
-| [scripts/](scripts/) | 规则整理、转换及编译 / Rule processing and compilation |
+| [scripts/](scripts/) | 统一规则整理及各格式生成 / Shared rule processing and format-specific exporters |
 | [plugins/](plugins/) | 客户端辅助插件 / Client-specific plugins |
 | [.github/workflows/](.github/workflows/) | 自动更新与发布 / Automated updates and publishing |
 
