@@ -12,7 +12,9 @@ RoutingRules is a curated and continuously maintained collection of network rout
 flowchart TD
     A["上游来源 / Upstream<br/>sources/upstream/"] --> C
     B["自定义规则 / Custom<br/>sources/custom/"] --> C
-    C["统一整理 / Rule processing<br/>build_rules.py"] --> D
+    C["统一整理 / Rule processing<br/>build_rules.py"] --> Q["规则质量检测 / Conflict check<br/>check_conflicts.py"]
+    Q --> D
+    Q -.-> R["冲突报告 / Reports<br/>reports/"]
     subgraph D["分类规则 / Rule categories"]
         direction LR
         US["US"]
@@ -26,7 +28,7 @@ flowchart TD
     F --> H["JSON"]
     H --> I["SRS"]
     G --> J["Loon"]
-    H --> K["Karing / sing-box"]
+    H --> K["sing-box compatible clients<br/>e.g. Karing"]
     I --> K
     P["本地回环规则 / Local loopback<br/>plugins/loon/"] --> J
     W["GitHub Actions<br/>每日更新 / Daily update"] -.-> C
@@ -35,7 +37,8 @@ flowchart TD
     classDef format fill:#f3f0e9,stroke:#a99a77,color:#413a2a
     classDef client fill:#e9e7f5,stroke:#9081b9,color:#352d50
     class A,B,P source
-    class C,US,CR,OS,DI,E,F process
+    class C,Q,US,CR,OS,DI,E,F process
+    class R format
     class G,H,I format
     class J,K client
 ```
@@ -45,7 +48,7 @@ flowchart TD
 | 分类 / Category | 内容 / Coverage |
 | --- | --- |
 | US | AI 服务、Google 生态、全球财经与新闻媒体 / AI services, Google ecosystem, financial news and international media |
-| Crypto | 加密资产、钱包、交易平台及行情工具 / Crypto assets, wallets, exchanges and market analytics |
+| Crypto | 加密资产、交易所、钱包、行情分析、量化交易及链上服务 / Crypto assets, exchanges, wallets, market analytics, algorithmic trading and on-chain services |
 | Overseas | GitHub、国际网站及网络工具 / GitHub, international websites and online utilities |
 | Direct | 中国大陆常用服务、银行、支付及 Apple 服务 / Mainland Chinese services, banking, payments and Apple services |
 
@@ -55,7 +58,7 @@ flowchart TD
 
 Choose the format for your client, copy its URL into a remote rule or rule set, and assign a connection policy to each category.
 
-| 分类 / Category | Loon (LIST) | Karing / sing-box (SRS) | sing-box (JSON) |
+| 分类 / Category | Loon (LIST) | sing-box (SRS) | sing-box (JSON) |
 | --- | --- | --- | --- |
 | US | [US.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/US.list) | [US.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/US.srs) | [US.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/US.json) |
 | Crypto | [Crypto.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/Crypto.list) | [Crypto.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Crypto.srs) | [Crypto.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Crypto.json) |
@@ -68,7 +71,15 @@ Choose the format for your client, copy its URL into a remote rule or rule set, 
 
 **Karing:** 在分流规则中添加自定义规则组，填入 SRS 或 JSON 地址并选择策略。 / Create a custom diversion group, add the SRS or JSON rule-set URL, and select a policy.
 
-建议从 US → Crypto → Overseas → Direct 的顺序开始配置，按实际需要调整优先级和默认策略。 / A suggested starting order is US → Crypto → Overseas → Direct. Adjust priority and the default policy to suit your setup.
+建议优先匹配 US、Crypto 等专项规则，再匹配 Overseas、Direct 等基础规则。同层级的匹配顺序和默认策略由客户端配置。 / Match specialized rules (US and Crypto) before general rules (Overseas and Direct). Choose the order within each tier and the default policy in your client.
+
+## 规则质量 / Rule Quality
+
+构建时移除基础规则中与专项规则完全相同的条目。同层级规则的重复项以及域名后缀、关键词、IP 网段等匹配范围重叠项保留，由客户端处理优先级。
+
+Exact duplicates of specialized rules are removed from general rule sets during the build. Duplicates within each tier and detected domain, keyword and IP range overlaps remain available for client-side priority selection.
+
+[冲突报告 / Conflict report](reports/conflicts.md) · [结构化数据 / JSON](reports/conflicts.json)
 
 ## 规则扩展与插件 / Rule Extensions & Plugins
 
@@ -95,6 +106,7 @@ Choose the format for your client, copy its URL into a remote rule or rule set, 
 | [subscriptions/](subscriptions/) | 按客户端格式发布的规则 / Client-specific subscriptions |
 | [scripts/](scripts/) | 统一规则整理及各格式生成 / Shared rule processing and format-specific exporters |
 | [plugins/](plugins/) | 客户端规则扩展 / Client-specific rule plugins |
+| [reports/](reports/) | 规则质量检测报告 / Rule quality reports |
 | [.github/workflows/](.github/workflows/) | 自动更新与发布 / Automated updates and publishing |
 
 基础规则来源包括 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，并结合本项目维护的服务域名。 / Base rules draw on [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script), supplemented by curated service domains.
