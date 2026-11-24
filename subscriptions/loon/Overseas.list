@@ -1,6 +1,6 @@
 # NAME: Overseas
 # FORMAT: Loon classical rules; one match per line without a policy
-# SUGGESTED POLICY: choose an appropriate client strategy; policy is assigned by the Loon client
+# SUGGESTED POLICY: client-selected strategy; policy is assigned by the Loon client
 # AUTO-GENERATED: edit sources/custom/*.list, not this file
 # SOURCE: sources/custom/Overseas.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list
