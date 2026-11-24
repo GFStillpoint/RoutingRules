@@ -1,6 +1,16 @@
-# NAME: Overseas_Utility
-# FORMAT: Loon / Mihomo classical rules
-# Routing policy is selected by the client.
+# NAME: Overseas
+# Curated overseas sites; traffic policy is selected by the client.
+# GitHub Copilot endpoints belong in US_AI, not here.
+DOMAIN-SUFFIX,github.com
+DOMAIN-SUFFIX,githubusercontent.com
+DOMAIN-SUFFIX,githubassets.com
+DOMAIN-SUFFIX,github.io
+DOMAIN-SUFFIX,github.dev
+DOMAIN-SUFFIX,githubapp.com
+DOMAIN-SUFFIX,githubstatus.com
+DOMAIN-SUFFIX,github.blog
+DOMAIN-SUFFIX,github.community
+DOMAIN-SUFFIX,ghcr.io
 
 # Utility and documentation services
 DOMAIN-SUFFIX,cdn.tldraw.com

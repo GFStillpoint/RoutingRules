@@ -6,6 +6,7 @@ on:
     - cron: '17 0 * * *'
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
       - 'sources/**'
       - 'scripts/**'
@@ -26,21 +27,21 @@ jobs:
       - name: Check out main
         uses: actions/checkout@v4
 
-      - name: Fetch upstream and build all subscriptions
+      - name: Fetch upstream and generate LIST and JSON subscriptions
         run: python3 scripts/build_rules.py
 
       - name: Verify expected rules and ensure no raw domain-set syntax
         shell: bash
         run: |
-          for file in subscriptions/US.list subscriptions/Crypto.list subscriptions/Direct.list subscriptions/Overseas.list; do
+          for file in subscriptions/loon/US.list subscriptions/loon/Crypto.list subscriptions/loon/Direct.list subscriptions/loon/Overseas.list; do
             test -s "$file"
             ! grep -Eq '^\.' "$file"
           done
-          grep -qx 'DOMAIN-SUFFIX,openai.com' subscriptions/US.list
-          grep -qx 'DOMAIN-SUFFIX,hyperliquid.xyz' subscriptions/Crypto.list
-          grep -qx 'DOMAIN-SUFFIX,qcc.com' subscriptions/Direct.list
-          grep -qx 'DOMAIN-SUFFIX,apple.com' subscriptions/Direct.list
-          grep -qx 'DOMAIN-SUFFIX,github.com' subscriptions/Overseas.list
+          grep -qx 'DOMAIN-SUFFIX,openai.com' subscriptions/loon/US.list
+          grep -qx 'DOMAIN-SUFFIX,hyperliquid.xyz' subscriptions/loon/Crypto.list
+          grep -qx 'DOMAIN-SUFFIX,qcc.com' subscriptions/loon/Direct.list
+          grep -qx 'DOMAIN-SUFFIX,apple.com' subscriptions/loon/Direct.list
+          grep -qx 'DOMAIN-SUFFIX,github.com' subscriptions/loon/Overseas.list
 
       - name: Install pinned sing-box compiler
         shell: bash
@@ -56,7 +57,7 @@ jobs:
           install -m 0755 "$RUNNER_TEMP/sing-box-${version}-linux-amd64/sing-box" "$RUNNER_TEMP/sing-box"
           echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
 
-      - name: Generate and verify sing-box rule sets
+      - name: Compile and verify sing-box binary rule sets
         shell: bash
         run: |
           sing-box version
@@ -69,12 +70,12 @@ jobs:
       - name: Commit changed generated files only
         shell: bash
         run: |
-          git add subscriptions/ rules/China.list rules/Crypto.list
+          git add subscriptions/
           if git diff --cached --quiet; then
             echo "All generated subscriptions are up to date"
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "chore: refresh Loon and sing-box subscriptions"
+          git commit -m "chore: refresh routing rule subscriptions"
           git push

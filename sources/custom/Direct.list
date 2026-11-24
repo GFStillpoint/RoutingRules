@@ -1,4 +1,4 @@
-# NAME: Direct_Custom
+# NAME: Direct
 # FORMAT: Loon classical domain rules, no policy value in source
 # Curated mainland services and selected first-party/SDK domains.
 # Used by the generated Direct subscription alongside upstream China and Apple sources.

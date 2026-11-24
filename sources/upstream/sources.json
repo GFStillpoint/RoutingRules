@@ -1,0 +1,46 @@
+{
+  "sources": [
+    {
+      "name": "China",
+      "category": "Direct",
+      "format": "classical",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/China/China.list",
+      "minimum": 50
+    },
+    {
+      "name": "China_Domain",
+      "category": "Direct",
+      "format": "domain-set",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/China/China_Domain.list",
+      "minimum": 3000
+    },
+    {
+      "name": "Apple",
+      "category": "Direct",
+      "format": "classical",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple.list",
+      "minimum": 35
+    },
+    {
+      "name": "Apple_Domain",
+      "category": "Direct",
+      "format": "domain-set",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple_Domain.list",
+      "minimum": 1400
+    },
+    {
+      "name": "Proxy",
+      "category": "Overseas",
+      "format": "classical",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list",
+      "minimum": 100
+    },
+    {
+      "name": "Proxy_Domain",
+      "category": "Overseas",
+      "format": "domain-set",
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy_Domain.list",
+      "minimum": 6500
+    }
+  ]
+}
