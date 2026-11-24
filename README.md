@@ -1,8 +1,8 @@
 # LoonRules
 
-**简洁、自动更新的 Loon 分流规则合集。** 按服务类型整理常用网站和应用，让不同网络流量使用合适的连接策略。
+**简洁、自动更新的 Loon 与 Karing 分流规则合集。** 按服务类型整理常用网站和应用，让不同网络流量使用合适的连接策略。
 
-**A clean, automatically updated collection of routing rules for Loon.** Organize websites and apps into practical categories and choose how each category connects.
+**A clean, automatically updated collection of routing rules for Loon and Karing.** Organize websites and apps into practical categories and choose how each category connects.
 
 ## 规则订阅 / Rule Subscriptions
 
@@ -13,7 +13,7 @@
 | **[Overseas](subscriptions/Overseas.list)** | GitHub、国际网站及常用网络工具 / GitHub, international sites and online utilities |
 | **[Direct](subscriptions/Direct.list)** | 中国大陆常用网站、银行、支付及 Apple 服务 / Mainland Chinese websites, banking, payments and Apple services |
 
-**订阅地址 / Subscription URLs**
+**Loon — LIST**
 
 ~~~text
 https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/US.list
@@ -22,18 +22,39 @@ https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/Over
 https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/Direct.list
 ~~~
 
+**Karing / sing-box — SRS**
+
+~~~text
+https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/US.srs
+https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/Crypto.srs
+https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/Overseas.srs
+https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/Direct.srs
+~~~
+
+**JSON 源格式 / JSON source format:** [US](subscriptions/sing-box/US.json) · [Crypto](subscriptions/sing-box/Crypto.json) · [Overseas](subscriptions/sing-box/Overseas.json) · [Direct](subscriptions/sing-box/Direct.json)
+
 ## 快速开始 / Quick Start
+
+### Loon
 
 1. **添加订阅 / Add a subscription** — 在 Loon 的规则设置中新增远程规则，粘贴上方对应的 URL。 / Add a remote rule in Loon and paste its URL.
 2. **选择策略 / Choose a policy** — 根据网络环境，为各类规则选择直连或合适的代理策略。Direct 通常选择 **DIRECT**。 / Assign a direct or proxy policy to each list. **DIRECT** is commonly used for the Direct category.
 3. **排列顺序 / Set the order** — 建议按照 **US → Crypto → Overseas → Direct → FINAL** 排列，再按实际需求微调。 / A useful starting order is **US → Crypto → Overseas → Direct → FINAL**; customize it as needed.
 4. **更新规则 / Refresh** — 在 Loon 中更新远程规则，即可获取仓库发布的最新内容。 / Refresh remote rules in Loon to load the latest published lists.
 
+### Karing
+
+在「设置 → 分流 → 分流规则」中新建自定义分流组，选择 Rule Set，添加相应的 SRS 地址并保存。为各组选择所需策略，使用分流规则探测检查匹配结果。
+
+In Settings → Diversion → Diversion Rules, create a custom group and add the corresponding SRS URL under Rule Set. Save, choose a policy for each group, and use Diversion Rule Detection to test matches.
+
+SRS 与 JSON 使用 sing-box v2 规则集格式，包含域名和 IP 匹配；USER-AGENT 为 Loon 专用匹配项，IP 解析行为由客户端设置控制。 / SRS and JSON use sing-box rule-set version 2 for domain and IP matching. USER-AGENT remains Loon-specific; IP resolution follows client settings.
+
 ## 自动更新 / Automatic Updates
 
-项目每天自动同步上游规则，并合并社区维护的扩充内容。新规则经过整理和去重后发布到四份订阅。
+项目每天自动同步上游规则，并合并社区维护的扩充内容。新规则经过整理和去重后同步发布为 LIST、JSON 和 SRS 格式。
 
-The repository syncs upstream rules daily, merges curated additions, and publishes refreshed lists after validation and deduplication.
+The repository syncs upstream rules daily, merges curated additions, and publishes refreshed LIST, JSON and SRS files after validation and deduplication.
 
 **更新频率 / Schedule:** 00:17 UTC 每日一次 / Once daily at 00:17 UTC. 源规则修改后也会触发构建 / Source changes also trigger a build.
 
@@ -41,7 +62,7 @@ The repository syncs upstream rules daily, merges curated additions, and publish
 
 | 目录 / Directory | 用途 / Purpose |
 | --- | --- |
-| [subscriptions/](subscriptions/) | 可以直接导入 Loon 的四份规则 / Ready-to-use Loon subscriptions |
+| [subscriptions/](subscriptions/) | Loon 与 sing-box 订阅 / Ready-to-use Loon and sing-box subscriptions |
 | [sources/](sources/) | 按类别整理的规则素材 / Curated source lists by category |
 | [scripts/](scripts/) | 规则转换、合并与校验 / Rule conversion, merging and validation |
 | [.github/workflows/](.github/workflows/) | 自动更新任务 / Scheduled updates |
