@@ -1,12 +1,12 @@
 # RoutingRules
 
-RoutingRules 是一个持续维护的网络分流规则集，按服务类型整理域名与 IP 规则，并提供适配不同客户端的订阅文件。
+RoutingRules 是一个持续维护的网络分流规则集，按服务类型整理域名与 IP 规则，并提供适配不同客户端的订阅文件及网络规则扩展。
 
-RoutingRules is a curated and continuously maintained collection of network routing rules. It organizes domain and IP rules by service category and publishes subscription files in formats for different clients.
+RoutingRules is a curated and continuously maintained collection of network routing rules. It organizes domain and IP rules by service category and publishes client-specific subscription files and network rule extensions.
 
 ## 架构 / Architecture
 
-统一整理规则，按客户端格式发布。上游来源与自定义规则独立维护，辅助插件按客户端归类。 / Rules are processed centrally and published in client-specific formats. Upstream sources and custom rules are maintained separately; utilities are organized by client.
+统一整理规则，按客户端格式发布。上游来源与自定义规则独立维护，特定网络场景的规则扩展以客户端插件形式提供。 / Rules are processed centrally and published in client-specific formats. Upstream sources and custom rules are maintained separately; specialized network rules are provided as client-specific plugins.
 
 ```mermaid
 flowchart TD
@@ -28,7 +28,7 @@ flowchart TD
     G --> J["Loon"]
     H --> K["Karing / sing-box"]
     I --> K
-    P["辅助插件 / Plugins<br/>plugins/loon/"] --> J
+    P["本地回环规则 / Local loopback<br/>plugins/loon/"] --> J
     W["GitHub Actions<br/>每日更新 / Daily update"] -.-> C
     classDef source fill:#e8eff8,stroke:#7293bc,color:#20334d
     classDef process fill:#e8f3ee,stroke:#61977d,color:#203c30
@@ -70,13 +70,13 @@ Choose the format for your client, copy its URL into a remote rule or rule set, 
 
 建议从 US → Crypto → Overseas → Direct 的顺序开始配置，按实际需要调整优先级和默认策略。 / A suggested starting order is US → Crypto → Overseas → Direct. Adjust priority and the default policy to suit your setup.
 
-## 插件 / Plugins
+## 规则扩展与插件 / Rule Extensions & Plugins
 
-项目还提供独立的客户端辅助插件。 / Additional client utilities are available as optional plugins.
+针对特定网络场景，项目同时提供可独立启用的客户端规则插件。 / The project also provides independently enabled rule plugins for specialized network scenarios.
 
 | 客户端 / Client | 插件 / Plugin | 功能 / Features |
 | --- | --- | --- |
-| Loon | [Device Loopback](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/plugins/loon/Device_Loopback.plugin) | 支持本地开发服务的回环连接，适用于兼容的 iOS 开发工具。 / Enables local development loopback connections for compatible iOS development tools. |
+| Loon | [Device Loopback](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/plugins/loon/Device_Loopback.plugin) | 通过 Loon 处理本地开发服务的回环连接，使兼容的 iOS 开发工具能够在使用 Loon 时访问本地服务，避免为此反复切换 LocalDevVPN。 / Handles local development loopback traffic through Loon, allowing compatible iOS development tools to access local services without repeatedly switching to LocalDevVPN. |
 
 在 Loon 的插件页面添加对应链接即可使用。 / Add the plugin URL in Loon's plugin settings.
 
@@ -94,7 +94,7 @@ Choose the format for your client, copy its URL into a remote rule or rule set, 
 | [sources/custom/](sources/custom/) | 自定义规则 / Curated custom rules |
 | [subscriptions/](subscriptions/) | 按客户端格式发布的规则 / Client-specific subscriptions |
 | [scripts/](scripts/) | 统一规则整理及各格式生成 / Shared rule processing and format-specific exporters |
-| [plugins/](plugins/) | 客户端辅助插件 / Client-specific plugins |
+| [plugins/](plugins/) | 客户端规则扩展 / Client-specific rule plugins |
 | [.github/workflows/](.github/workflows/) | 自动更新与发布 / Automated updates and publishing |
 
 基础规则来源包括 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，并结合本项目维护的服务域名。 / Base rules draw on [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script), supplemented by curated service domains.
