@@ -1,79 +1,66 @@
-# LoonRules
+# RoutingRules
 
-**简洁、自动更新的 Loon 与 Karing 分流规则合集。** 按服务类型整理常用网站和应用，让不同网络流量使用合适的连接策略。
+RoutingRules 是一个持续维护的网络分流规则集，按服务类型整理域名与 IP 规则，并提供适配不同客户端的订阅文件。
 
-**A clean, automatically updated collection of routing rules for Loon and Karing.** Organize websites and apps into practical categories and choose how each category connects.
+RoutingRules is a curated and continuously maintained collection of network routing rules. It organizes domain and IP rules by service category and publishes subscription files in formats for different clients.
 
-## 规则订阅 / Rule Subscriptions
+## 规则分类 / Rule Categories
 
-| 规则 / List | 内容 / Coverage |
+| 分类 / Category | 内容 / Coverage |
 | --- | --- |
-| **[US](subscriptions/US.list)** | AI 服务、Google 生态、全球财经与新闻媒体 / AI services, Google ecosystem, financial news and international media |
-| **[Crypto](subscriptions/Crypto.list)** | 加密货币、钱包、交易所及行情工具 / Crypto, wallets, exchanges and market analytics |
-| **[Overseas](subscriptions/Overseas.list)** | GitHub、国际网站及常用网络工具 / GitHub, international sites and online utilities |
-| **[Direct](subscriptions/Direct.list)** | 中国大陆常用网站、银行、支付及 Apple 服务 / Mainland Chinese websites, banking, payments and Apple services |
+| US | AI 服务、Google 生态、全球财经与新闻媒体 / AI services, Google ecosystem, financial news and international media |
+| Crypto | 加密资产、钱包、交易平台及行情工具 / Crypto assets, wallets, exchanges and market analytics |
+| Overseas | GitHub、国际网站及网络工具 / GitHub, international websites and online utilities |
+| Direct | 中国大陆常用服务、银行、支付及 Apple 服务 / Mainland Chinese services, banking, payments and Apple services |
 
-**Loon — LIST**
+## 订阅地址 / Subscriptions
 
-~~~text
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/US.list
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/Crypto.list
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/Overseas.list
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/Direct.list
-~~~
+选择客户端对应的格式，复制链接添加至远程规则或 Rule Set，为各分类配置所需的连接策略。
 
-**Karing / sing-box — SRS**
+Choose the format for your client, copy its URL into a remote rule or rule set, and assign a connection policy to each category.
 
-~~~text
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/US.srs
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/Crypto.srs
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/Overseas.srs
-https://raw.githubusercontent.com/linjiayinchn/LoonRules/main/subscriptions/sing-box/Direct.srs
-~~~
+| 分类 / Category | Loon (LIST) | Karing / sing-box (SRS) | sing-box (JSON) |
+| --- | --- | --- | --- |
+| US | [US.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/US.list) | [US.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/US.srs) | [US.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/US.json) |
+| Crypto | [Crypto.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/Crypto.list) | [Crypto.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Crypto.srs) | [Crypto.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Crypto.json) |
+| Overseas | [Overseas.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/Overseas.list) | [Overseas.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Overseas.srs) | [Overseas.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Overseas.json) |
+| Direct | [Direct.list](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/loon/Direct.list) | [Direct.srs](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Direct.srs) | [Direct.json](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/subscriptions/sing-box/Direct.json) |
 
-**JSON 源格式 / JSON source format:** [US](subscriptions/sing-box/US.json) · [Crypto](subscriptions/sing-box/Crypto.json) · [Overseas](subscriptions/sing-box/Overseas.json) · [Direct](subscriptions/sing-box/Direct.json)
+### 快速开始 / Quick Start
 
-## 快速开始 / Quick Start
+**Loon:** 在规则设置中添加远程规则，填入 LIST 地址并选择策略。 / Add a remote rule using its LIST URL and select a policy.
 
-### Loon
+**Karing:** 在分流规则中添加自定义规则组，填入 SRS 或 JSON 地址并选择策略。 / Create a custom diversion group, add the SRS or JSON rule-set URL, and select a policy.
 
-1. **添加订阅 / Add a subscription** — 在 Loon 的规则设置中新增远程规则，粘贴上方对应的 URL。 / Add a remote rule in Loon and paste its URL.
-2. **选择策略 / Choose a policy** — 根据网络环境，为各类规则选择直连或合适的代理策略。Direct 通常选择 **DIRECT**。 / Assign a direct or proxy policy to each list. **DIRECT** is commonly used for the Direct category.
-3. **排列顺序 / Set the order** — 建议按照 **US → Crypto → Overseas → Direct → FINAL** 排列，再按实际需求微调。 / A useful starting order is **US → Crypto → Overseas → Direct → FINAL**; customize it as needed.
-4. **更新规则 / Refresh** — 在 Loon 中更新远程规则，即可获取仓库发布的最新内容。 / Refresh remote rules in Loon to load the latest published lists.
+建议从 US → Crypto → Overseas → Direct 的顺序开始配置，按实际需要调整优先级和默认策略。 / A suggested starting order is US → Crypto → Overseas → Direct. Adjust priority and the default policy to suit your setup.
 
-### Karing
+## 插件 / Plugins
 
-在「设置 → 分流 → 分流规则」中新建自定义分流组，选择 Rule Set，添加相应的 SRS 地址并保存。为各组选择所需策略，使用分流规则探测检查匹配结果。
+项目还提供独立的客户端辅助插件。 / Additional client utilities are available as optional plugins.
 
-In Settings → Diversion → Diversion Rules, create a custom group and add the corresponding SRS URL under Rule Set. Save, choose a policy for each group, and use Diversion Rule Detection to test matches.
+| 客户端 / Client | 插件 / Plugin | 功能 / Features |
+| --- | --- | --- |
+| Loon | [Device Loopback](https://raw.githubusercontent.com/linjiayinchn/RoutingRules/main/plugins/loon/Device_Loopback.plugin) | 支持本地开发服务的回环连接，适用于兼容的 iOS 开发工具。 / Enables local development loopback connections for compatible iOS development tools. |
 
-SRS 与 JSON 使用 sing-box v2 规则集格式，包含域名和 IP 匹配；USER-AGENT 为 Loon 专用匹配项，IP 解析行为由客户端设置控制。 / SRS and JSON use sing-box rule-set version 2 for domain and IP matching. USER-AGENT remains Loon-specific; IP resolution follows client settings.
+在 Loon 的插件页面添加对应链接即可使用。 / Add the plugin URL in Loon's plugin settings.
 
 ## 自动更新 / Automatic Updates
 
-项目每天自动同步上游规则，并合并社区维护的扩充内容。新规则经过整理和去重后同步发布为 LIST、JSON 和 SRS 格式。
+项目每天同步上游规则，与自定义规则统一整理、去重及校验，并生成各客户端的订阅文件。 / Upstream and custom rules are merged, deduplicated and validated daily before being exported into client-specific subscription files.
 
-The repository syncs upstream rules daily, merges curated additions, and publishes refreshed LIST, JSON and SRS files after validation and deduplication.
-
-**更新频率 / Schedule:** 00:17 UTC 每日一次 / Once daily at 00:17 UTC. 源规则修改后也会触发构建 / Source changes also trigger a build.
+更新计划 / Schedule: **00:17 UTC (08:17 UTC+8)**
 
 ## 项目结构 / Project Structure
 
 | 目录 / Directory | 用途 / Purpose |
 | --- | --- |
-| [subscriptions/](subscriptions/) | Loon 与 sing-box 订阅 / Ready-to-use Loon and sing-box subscriptions |
-| [sources/](sources/) | 按类别整理的规则素材 / Curated source lists by category |
-| [scripts/](scripts/) | 规则转换、合并与校验 / Rule conversion, merging and validation |
-| [.github/workflows/](.github/workflows/) | 自动更新任务 / Scheduled updates |
-| [plugins/](plugins/) | 可选的辅助插件 / Optional utilities and plugins |
+| [sources/upstream/](sources/upstream/) | 上游来源配置 / Upstream source registry |
+| [sources/custom/](sources/custom/) | 自定义规则 / Curated custom rules |
+| [subscriptions/](subscriptions/) | 按客户端格式发布的规则 / Client-specific subscriptions |
+| [scripts/](scripts/) | 规则整理、转换及编译 / Rule processing and compilation |
+| [plugins/](plugins/) | 客户端辅助插件 / Client-specific plugins |
+| [.github/workflows/](.github/workflows/) | 自动更新与发布 / Automated updates and publishing |
 
-### 规则来源 / Rule Sources
+基础规则来源包括 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，并结合本项目维护的服务域名。 / Base rules draw on [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script), supplemented by curated service domains.
 
-中国大陆、Apple 和常见境外网站的基础规则基于 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)。AI、Google、财经媒体、加密资产和常用服务域名由本项目持续整理扩充。
-
-Base coverage for mainland China, Apple, and international websites comes from [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script). This project maintains additional rules for AI, Google, finance, media, crypto and everyday services.
-
-欢迎通过 Issues 或 Pull Requests 分享建议及新域名。
-
-Suggestions and contributions are welcome through Issues and Pull Requests.
+欢迎通过 Issues 或 Pull Requests 提供建议与补充规则。 / Suggestions and contributions are welcome through Issues and Pull Requests.
