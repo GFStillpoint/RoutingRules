@@ -1,6 +1,6 @@
 # Rule conflicts / 规则冲突报告
 
-Generated / 检测时间: `2026-11-24T05:22:32+00:00`
+Generated / 检测时间: `2026-11-24T09:50:12+00:00`
 
 [JSON data / 结构化数据](conflicts.json)
 
