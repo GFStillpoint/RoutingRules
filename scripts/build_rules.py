@@ -1,36 +1,22 @@
 #!/usr/bin/env python3
-"""Build four Loon subscriptions from curated local inputs and blackmatrix7.
-
-Output:
-    subscriptions/{US,Crypto,Direct,Overseas}.list
-    rules/China.list and rules/Crypto.list (temporary legacy aliases)
-
-If any upstream fetch or input validation fails, stop without writing any output.
-Do not manually edit generated files.
-"""
+"""Collect, validate and publish shared routing rules in client-specific formats."""
 from __future__ import annotations
 
 from pathlib import Path
+import json
+from build_singbox import convert
 import re
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCES = ROOT / "sources"
+SOURCES = ROOT / "sources" / "custom"
 OUTPUTS = ROOT / "subscriptions"
-LEGACY = ROOT / "rules"
-UPSTREAM = "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon"
+MANIFEST = ROOT / "sources" / "upstream" / "sources.json"
 ALLOWED_TYPES = {
     "DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "USER-AGENT",
     "IP-CIDR", "IP-CIDR6",
 }
 VALID_DOMAIN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*\Z")
-
-REMOTE = {
-    "China": ("China", "China", 50, 3000),
-    "Apple": ("Apple", "Apple", 35, 1400),
-    "Proxy": ("Proxy", "Proxy", 100, 6500),
-}
-
 
 def lines(text: str) -> list[str]:
     return [s.strip() for s in text.splitlines() if s.strip() and not s.lstrip().startswith("#")]
@@ -60,7 +46,7 @@ def read_local(file: str, minimum: int = 0) -> list[str]:
 
 
 def download(url: str) -> str:
-    request = urllib.request.Request(url, headers={"User-Agent": "LoonRules-Builder/1.0"})
+    request = urllib.request.Request(url, headers={"User-Agent": "RoutingRules-Builder/1.0"})
     with urllib.request.urlopen(request, timeout=45) as res:
         text = res.read().decode("utf-8-sig")
     if not text or "<html" in text[:300].lower():
@@ -79,17 +65,25 @@ def read_domain_set(text: str, label: str) -> list[str]:
     return result
 
 
-def fetch_pair(name: str) -> tuple[list[str], list[str], tuple[str, str]]:
-    directory, basename, min_classical, min_domainset = REMOTE[name]
-    base = f"{UPSTREAM}/{directory}/{basename}"
-    url_classical, url_domainset = f"{base}.list", f"{base}_Domain.list"
-    classical = validate_classical(download(url_classical), url_classical)
-    domainset = read_domain_set(download(url_domainset), url_domainset)
-    if len(classical) < min_classical or len(domainset) < min_domainset:
-        raise ValueError(
-            f"Incomplete {name} source: classical={len(classical)}, domains={len(domainset)}"
-        )
-    return classical, domainset, (url_classical, url_domainset)
+def fetch_upstream():
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    groups = {"Direct": [], "Overseas": []}
+    urls = {"Direct": [], "Overseas": []}
+    for source in manifest["sources"]:
+        category = source["category"]
+        url = source["url"]
+        content = download(url)
+        if source["format"] == "classical":
+            rules = validate_classical(content, url)
+        elif source["format"] == "domain-set":
+            rules = read_domain_set(content, url)
+        else:
+            raise ValueError(f"Unknown source format: {source['format']}")
+        if len(rules) < source["minimum"]:
+            raise ValueError(f"Incomplete upstream source: {url} ({len(rules)})")
+        groups[category].extend(rules)
+        urls[category].append(url)
+    return groups, urls
 
 
 def merged(*groups: list[str]) -> list[str]:
@@ -108,7 +102,7 @@ def format_rules(name: str, rules: list[str], sources: list[str], policy: str) -
         f"# NAME: {name}",
         "# FORMAT: Loon classical rules; one match per line without a policy",
         f"# SUGGESTED POLICY: {policy}; policy is assigned by the Loon client",
-        "# AUTO-GENERATED: edit sources/*.list, not this file",
+        "# AUTO-GENERATED: edit sources/custom/*.list, not this file",
         *[f"# SOURCE: {source}" for source in sources],
         f"# RULES: {len(rules)}",
         "",
@@ -117,32 +111,29 @@ def format_rules(name: str, rules: list[str], sources: list[str], policy: str) -
 
 
 def build() -> dict[Path, str]:
-    china, china_domains, china_urls = fetch_pair("China")
-    apple, apple_domains, apple_urls = fetch_pair("Apple")
-    proxy, proxy_domains, proxy_urls = fetch_pair("Proxy")
-    direct_custom = read_local("Direct_Custom.list", 100)
-    overseas_custom = read_local("Overseas_Custom.list", 7)
-    utility = read_local("Overseas_Utility.list", 12)
-    us_ai = read_local("US_AI.list", 195)
-    us_google = read_local("US_Google.list", 570)
-    us_finance = read_local("US_Finance.list", 300)
-
-    # The source text of Crypto is intentionally copied unmodified for old URLs.
-    crypto_text = (SOURCES / "Crypto.list").read_text(encoding="utf-8-sig")
-    crypto = validate_classical(crypto_text, "Crypto.list")
-    if len(crypto) < 190:
-        raise ValueError(f"Crypto source unexpectedly short: {len(crypto)}")
-
-    us = merged(us_ai, us_google, us_finance)
-    china_only = merged(direct_custom, china, china_domains)
-    direct = merged(direct_custom, china, china_domains, apple, apple_domains)
-    # Specific US/Crypto subscriptions should precede broader Overseas/Direct.
-    # Remove exactly duplicated Direct and US entries from Overseas; more
-    # general base rules continue to cover unrelated services.
-    direct_keys = set(direct)
-    us_keys = set(us)
-    overseas = [rule for rule in merged(overseas_custom, utility, proxy, proxy_domains)
-                if rule not in direct_keys and rule not in us_keys]
+    upstream, urls = fetch_upstream()
+    local = {
+        "US": ["US_AI.list", "US_Google.list", "US_Finance.list"],
+        "Crypto": ["Crypto.list"],
+        "Direct": ["Direct.list"],
+        "Overseas": ["Overseas.list"],
+    }
+    minimums = {
+        "US_AI.list": 195, "US_Google.list": 570, "US_Finance.list": 300,
+        "Crypto.list": 190, "Direct.list": 100, "Overseas.list": 20,
+    }
+    records = {
+        name: merged(*(read_local(file, minimums[file]) for file in files),
+                     upstream.get(name, []))
+        for name, files in local.items()
+    }
+    us = records["US"]
+    crypto = records["Crypto"]
+    direct = records["Direct"]
+    # Preserve existing precedence and remove exact overlaps with US and Direct.
+    excluded = set(us) | set(direct)
+    records["Overseas"] = [rule for rule in records["Overseas"] if rule not in excluded]
+    overseas = records["Overseas"]
 
     must_include("US", us, (
         "DOMAIN-SUFFIX,openai.com", "DOMAIN-SUFFIX,bloomberg.com",
@@ -151,7 +142,7 @@ def build() -> dict[Path, str]:
         "DOMAIN-SUFFIX,googleapis.com", "DOMAIN-KEYWORD,google",
     ))
     must_include("Crypto", crypto, ("DOMAIN-SUFFIX,hyperliquid.xyz", "DOMAIN-SUFFIX,tradingview.com"))
-    must_include("China", china_only, (
+    must_include("Direct", direct, (
         "DOMAIN-SUFFIX,qcc.com", "DOMAIN-SUFFIX,qichacha.com",
         "DOMAIN,sysdk.cl2009.com", "DOMAIN,analytics.oceanengine.com",
     ))
@@ -168,34 +159,16 @@ def build() -> dict[Path, str]:
         "DOMAIN,analytics.oceanengine.com",
     ))
 
-    outputs = {
-        OUTPUTS / "US.list": format_rules(
-            "US", us, ["sources/US_AI.list", "sources/US_Google.list", "sources/US_Finance.list"], "choose an appropriate client strategy"
-        ),
-        OUTPUTS / "Crypto.list": crypto_text,
-        OUTPUTS / "Direct.list": format_rules(
-            "Direct", direct, [
-                "sources/Direct_Custom.list", *china_urls, *apple_urls,
-            ], "DIRECT"
-        ),
-        OUTPUTS / "Overseas.list": format_rules(
-            "Overseas", overseas, [
-                "sources/Overseas_Custom.list", "sources/Overseas_Utility.list", *proxy_urls,
-            ], "choose an appropriate client strategy"
-        ),
-        # Keep the old China and Crypto subscription URLs working during migration.
-        LEGACY / "China.list": "\n".join([
-            "# NAME: China (blackmatrix7 + custom)",
-            "# FORMAT: Loon classical rule subscription",
-            "# POLICY: DIRECT (set in Loon subscription, not in this file)",
-            "# AUTO-GENERATED: deprecated alias; edit sources/Direct_Custom.list",
-            f"# SOURCE: {china_urls[0]}",
-            f"# SOURCE: {china_urls[1]}",
-            f"# RULES: {len(china_only)}",
-            "", *china_only, "",
-        ]),
-        LEGACY / "Crypto.list": crypto_text,
-    }
+    outputs = {}
+    for name, rules in records.items():
+        provenance = [f"sources/custom/{file}" for file in local[name]] + urls.get(name, [])
+        policy = "DIRECT" if name == "Direct" else "client-selected strategy"
+        outputs[OUTPUTS / "loon" / f"{name}.list"] = format_rules(
+            name, rules, provenance, policy
+        )
+        outputs[OUTPUTS / "sing-box" / f"{name}.json"] = json.dumps(
+            convert(name, rules), indent=2, ensure_ascii=False
+        ) + "\n"
     return outputs
 
 
