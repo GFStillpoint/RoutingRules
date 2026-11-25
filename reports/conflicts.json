@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T08:26:08+00:00",
+  "generated_at": "2026-11-25T09:22:44+00:00",
   "rule_counts": {
     "US": {
       "before": 1106,
@@ -11,8 +11,8 @@
       "after": 375
     },
     "Overseas": {
-      "before": 7017,
-      "after": 6810
+      "before": 7018,
+      "after": 6811
     },
     "Direct": {
       "before": 5390,
