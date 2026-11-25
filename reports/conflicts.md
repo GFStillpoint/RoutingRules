@@ -1,6 +1,6 @@
 # Rule conflicts / 规则冲突报告
 
-Generated / 检测时间: `2026-11-25T09:22:44+00:00`
+Generated / 检测时间: `2026-11-25T11:55:32+00:00`
 
 [JSON data / 结构化数据](conflicts.json)
 
@@ -12,7 +12,7 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | --- | ---: | ---: |
 | US | 1106 | 1106 |
 | Crypto | 375 | 375 |
-| Overseas | 7018 | 6811 |
+| Overseas | 7019 | 6812 |
 | Direct | 5390 | 5387 |
 
 ## Removed exact duplicates / 已去重 (210)

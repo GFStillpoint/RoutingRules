@@ -5,7 +5,7 @@
 # SOURCE: sources/custom/Overseas.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy_Domain.list
-# RULES: 6811
+# RULES: 6812
 
 DOMAIN-SUFFIX,github.com
 DOMAIN-SUFFIX,githubusercontent.com
@@ -34,6 +34,7 @@ DOMAIN-SUFFIX,esm.sh
 DOMAIN-SUFFIX,imagedelivery.net
 DOMAIN-SUFFIX,formulae.brew.sh
 DOMAIN-SUFFIX,jianke-3.com
+DOMAIN-SUFFIX,hushedge.com
 DOMAIN-KEYWORD,1drv
 DOMAIN-KEYWORD,abema
 DOMAIN-KEYWORD,appledaily
