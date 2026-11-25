@@ -191,7 +191,7 @@ DOMAIN,o33249.ingest.sentry.io
 DOMAIN,rum.browser-intake-datadoghq.com
 
 # Gemini and Copilot service-specific auxiliary hosts
-# Do not proxy entire googleapis.com / gstatic.com / office.com namespaces.
+# Google API and static-content namespaces are covered by US_Google.list; Microsoft Office hosts are scoped to the listed endpoints.
 DOMAIN,optimizationguide-pa.googleapis.com
 DOMAIN,csp.withgoogle.com
 DOMAIN,substrate.office.com
