@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T11:55:32+00:00",
+  "generated_at": "2026-11-25T14:25:30+00:00",
   "rule_counts": {
     "US": {
-      "before": 1106,
-      "after": 1106
+      "before": 1209,
+      "after": 1209
     },
     "Crypto": {
       "before": 375,
@@ -2098,6 +2098,17 @@
         "Overseas"
       ],
       "rules": [
+        "DOMAIN,google-gemini.github.io",
+        "DOMAIN-SUFFIX,github.io"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
         "DOMAIN,koreajoongangdaily.joins.com",
         "DOMAIN-SUFFIX,joins.com"
       ]
@@ -2155,6 +2166,61 @@
       "rules": [
         "DOMAIN-SUFFIX,ecb.europa.eu",
         "DOMAIN-SUFFIX,europa.eu"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,goog",
+        "DOMAIN,voice.telephony.goog"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,goog",
+        "DOMAIN-SUFFIX,cloud.cupronickel.goog"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,goog",
+        "DOMAIN-SUFFIX,pki.goog"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,goog",
+        "DOMAIN-SUFFIX,translate.goog"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,goog",
+        "DOMAIN-SUFFIX,usercontent.goog"
       ]
     },
     {

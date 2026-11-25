@@ -1,6 +1,6 @@
 # Rule conflicts / 规则冲突报告
 
-Generated / 检测时间: `2026-11-25T11:55:32+00:00`
+Generated / 检测时间: `2026-11-25T14:25:30+00:00`
 
 [JSON data / 结构化数据](conflicts.json)
 
@@ -10,7 +10,7 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 
 | Category / 分类 | Before / 处理前 | After / 处理后 |
 | --- | ---: | ---: |
-| US | 1106 | 1106 |
+| US | 1209 | 1209 |
 | Crypto | 375 | 375 |
 | Overseas | 7019 | 6812 |
 | Direct | 5390 | 5387 |
@@ -243,7 +243,7 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | USER-AGENT,com.apple.trustd* | Overseas, Direct |
 | USER-AGENT,hearthstone* | Overseas, Direct |
 
-## Structural overlaps / 匹配范围重叠 (96)
+## Structural overlaps / 匹配范围重叠 (102)
 
 Detected domain suffix relationships, explicit keyword containment and overlapping IP networks. These are structural checks, not exhaustive runtime matches. / 检测域名后缀、明确的关键词包含关系及 IP 网段重叠；不等同于实际流量匹配的穷尽检测。
 
@@ -263,12 +263,18 @@ Detected domain suffix relationships, explicit keyword containment and overlappi
 | domain_suffix | US | DOMAIN,agent-stores.s3.amazonaws.com | Overseas | DOMAIN-SUFFIX,amazonaws.com |
 | domain_suffix | US | DOMAIN,agent-stores.s3.us-east-1.amazonaws.com | Overseas | DOMAIN-SUFFIX,amazonaws.com |
 | domain_suffix | US | DOMAIN,anysphere-binaries.s3.us-east-1.amazonaws.com | Overseas | DOMAIN-SUFFIX,amazonaws.com |
+| domain_suffix | US | DOMAIN,google-gemini.github.io | Overseas | DOMAIN-SUFFIX,github.io |
 | domain_suffix | US | DOMAIN,koreajoongangdaily.joins.com | Overseas | DOMAIN-SUFFIX,joins.com |
 | domain_suffix | US | DOMAIN-SUFFIX,abcnews.go.com | Overseas | DOMAIN-SUFFIX,go.com |
 | domain_suffix | US | DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com | Overseas | DOMAIN-SUFFIX,githubusercontent.com |
 | domain_suffix | US | DOMAIN-SUFFIX,copilot.microsoft.com | Overseas | DOMAIN-SUFFIX,microsoft.com |
 | domain_suffix | US | DOMAIN-SUFFIX,designer.microsoft.com | Overseas | DOMAIN-SUFFIX,microsoft.com |
 | domain_suffix | US | DOMAIN-SUFFIX,ecb.europa.eu | Overseas | DOMAIN-SUFFIX,europa.eu |
+| domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN,voice.telephony.goog |
+| domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,cloud.cupronickel.goog |
+| domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,pki.goog |
+| domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,translate.goog |
+| domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,usercontent.goog |
 | domain_suffix | US | DOMAIN-SUFFIX,news.ycombinator.com | Overseas | DOMAIN-SUFFIX,ycombinator.com |
 | domain_suffix | US | DOMAIN-SUFFIX,oaiusercontent.com | Overseas | DOMAIN-SUFFIX,files.oaiusercontent.com |
 | domain_suffix | US | DOMAIN-SUFFIX,openai.com | Overseas | DOMAIN-SUFFIX,chat.openai.com |
