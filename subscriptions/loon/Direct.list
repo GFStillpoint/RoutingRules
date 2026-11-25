@@ -7,7 +7,7 @@
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/China/China_Domain.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple_Domain.list
-# RULES: 5387
+# RULES: 5386
 
 DOMAIN-SUFFIX,qcc.com
 DOMAIN-SUFFIX,qichacha.com
@@ -4653,7 +4653,6 @@ DOMAIN-SUFFIX,coolmonster.net
 DOMAIN-SUFFIX,coreml.net
 DOMAIN-SUFFIX,cozydrdrebeats.com
 DOMAIN-SUFFIX,cqcorea.com
-DOMAIN-SUFFIX,crashlytics.com
 DOMAIN-SUFFIX,cuffiesaldi.com
 DOMAIN-SUFFIX,cups.org
 DOMAIN-SUFFIX,custom-iphonecase.com

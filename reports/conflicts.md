@@ -1,6 +1,6 @@
 # Rule conflicts / 规则冲突报告
 
-Generated / 检测时间: `2026-11-25T14:25:30+00:00`
+Generated / 检测时间: `2026-11-25T14:27:09+00:00`
 
 [JSON data / 结构化数据](conflicts.json)
 
@@ -10,12 +10,12 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 
 | Category / 分类 | Before / 处理前 | After / 处理后 |
 | --- | ---: | ---: |
-| US | 1209 | 1209 |
+| US | 1299 | 1299 |
 | Crypto | 375 | 375 |
-| Overseas | 7019 | 6812 |
-| Direct | 5390 | 5387 |
+| Overseas | 7019 | 6800 |
+| Direct | 5390 | 5386 |
 
-## Removed exact duplicates / 已去重 (210)
+## Removed exact duplicates / 已去重 (222)
 
 | Rule / 规则 | Kept in / 保留于 | Removed from / 移除于 |
 | --- | --- | --- |
@@ -31,16 +31,20 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | DOMAIN-SUFFIX,admob.com | US | Overseas |
 | DOMAIN-SUFFIX,adsense.com | US | Overseas |
 | DOMAIN-SUFFIX,afr.com | US | Overseas |
+| DOMAIN-SUFFIX,ai.studio | US | Overseas |
 | DOMAIN-SUFFIX,aljazeera.com | US | Overseas |
 | DOMAIN-SUFFIX,aljazeera.net | US | Overseas |
 | DOMAIN-SUFFIX,android.com | US | Overseas |
 | DOMAIN-SUFFIX,androidify.com | US | Overseas |
 | DOMAIN-SUFFIX,androidtv.com | US | Overseas |
 | DOMAIN-SUFFIX,ap.org | US | Overseas |
+| DOMAIN-SUFFIX,api.ai | US | Overseas |
+| DOMAIN-SUFFIX,apigee.com | US | Overseas |
 | DOMAIN-SUFFIX,app-measurement.net | US | Overseas |
 | DOMAIN-SUFFIX,appspot.com | US | Overseas |
 | DOMAIN-SUFFIX,arstechnica.net | US | Overseas |
 | DOMAIN-SUFFIX,asiaone.com | US | Overseas |
+| DOMAIN-SUFFIX,autodraw.com | US | Overseas |
 | DOMAIN-SUFFIX,axios.com | US | Overseas |
 | DOMAIN-SUFFIX,bangkokpost.com | US | Overseas |
 | DOMAIN-SUFFIX,bbc.co.uk | US | Overseas |
@@ -62,6 +66,7 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | DOMAIN-SUFFIX,cbc.ca | US | Overseas |
 | DOMAIN-SUFFIX,cbsnews.com | US | Overseas |
 | DOMAIN-SUFFIX,cerebras.ai | US | Overseas |
+| DOMAIN-SUFFIX,certificate-transparency.org | US | Overseas |
 | DOMAIN-SUFFIX,cex.io | Crypto | Overseas |
 | DOMAIN-SUFFIX,channelnewsasia.com | US | Overseas |
 | DOMAIN-SUFFIX,character.ai | US | Overseas |
@@ -82,6 +87,7 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | DOMAIN-SUFFIX,coinex.com | Crypto | Overseas |
 | DOMAIN-SUFFIX,coingecko.com | Crypto | Overseas |
 | DOMAIN-SUFFIX,coinmarketcap.com | Crypto | Overseas |
+| DOMAIN-SUFFIX,crashlytics.com | US | Overseas, Direct |
 | DOMAIN-SUFFIX,crbug.com | US | Overseas |
 | DOMAIN-SUFFIX,crrev.com | US | Overseas |
 | DOMAIN-SUFFIX,dailymail.co.uk | US | Overseas |
@@ -169,6 +175,7 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | DOMAIN-SUFFIX,pancakeswap.finance | Crypto | Overseas |
 | DOMAIN-SUFFIX,pbs.org | US | Overseas |
 | DOMAIN-SUFFIX,perplexity.ai | US | Overseas |
+| DOMAIN-SUFFIX,pki.goog | US | Overseas |
 | DOMAIN-SUFFIX,plus.codes | US | Overseas |
 | DOMAIN-SUFFIX,poe.com | US | Overseas |
 | DOMAIN-SUFFIX,poloniex.com | Crypto | Overseas |
@@ -215,11 +222,16 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | DOMAIN-SUFFIX,washingtonpost.com | US | Overseas |
 | DOMAIN-SUFFIX,waymo.com | US | Overseas |
 | DOMAIN-SUFFIX,web.dev | US | Overseas |
+| DOMAIN-SUFFIX,webmproject.org | US | Overseas |
+| DOMAIN-SUFFIX,webpkgcache.com | US | Overseas |
+| DOMAIN-SUFFIX,webrtc.org | US | Overseas |
+| DOMAIN-SUFFIX,widevine.com | US | Overseas |
 | DOMAIN-SUFFIX,worldbank.org | US | Direct |
 | DOMAIN-SUFFIX,wsj.com | US | Overseas |
 | DOMAIN-SUFFIX,wsj.net | US | Overseas |
 | DOMAIN-SUFFIX,x.ai | US | Overseas |
 | DOMAIN-SUFFIX,x.company | US | Overseas |
+| DOMAIN-SUFFIX,xn--ngstr-lra8j.com | US | Overseas |
 | DOMAIN-SUFFIX,xt.com | Crypto | Overseas |
 | DOMAIN-SUFFIX,yahoo.com | US | Overseas |
 | DOMAIN-SUFFIX,yimg.com | US | Overseas |
@@ -230,20 +242,19 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | DOMAIN-SUFFIX,ytimg.com | US | Overseas |
 | DOMAIN-SUFFIX,zerohedge.com | US | Overseas |
 
-## Retained peer duplicates / 同层重复 (8)
+## Retained peer duplicates / 同层重复 (7)
 
 | Rule / 规则 | Categories / 分类 |
 | --- | --- |
 | DOMAIN-SUFFIX,apple-dns.net | Overseas, Direct |
 | DOMAIN-SUFFIX,appsto.re | Overseas, Direct |
-| DOMAIN-SUFFIX,crashlytics.com | Overseas, Direct |
 | DOMAIN-SUFFIX,digicert.com | Overseas, Direct |
 | DOMAIN-SUFFIX,itun.es | Overseas, Direct |
 | DOMAIN-SUFFIX,shazam.com | Overseas, Direct |
 | USER-AGENT,com.apple.trustd* | Overseas, Direct |
 | USER-AGENT,hearthstone* | Overseas, Direct |
 
-## Structural overlaps / 匹配范围重叠 (102)
+## Structural overlaps / 匹配范围重叠 (105)
 
 Detected domain suffix relationships, explicit keyword containment and overlapping IP networks. These are structural checks, not exhaustive runtime matches. / 检测域名后缀、明确的关键词包含关系及 IP 网段重叠；不等同于实际流量匹配的穷尽检测。
 
@@ -270,9 +281,10 @@ Detected domain suffix relationships, explicit keyword containment and overlappi
 | domain_suffix | US | DOMAIN-SUFFIX,copilot.microsoft.com | Overseas | DOMAIN-SUFFIX,microsoft.com |
 | domain_suffix | US | DOMAIN-SUFFIX,designer.microsoft.com | Overseas | DOMAIN-SUFFIX,microsoft.com |
 | domain_suffix | US | DOMAIN-SUFFIX,ecb.europa.eu | Overseas | DOMAIN-SUFFIX,europa.eu |
+| domain_suffix | US | DOMAIN-SUFFIX,gle | Overseas | DOMAIN-SUFFIX,c.gle |
+| domain_suffix | US | DOMAIN-SUFFIX,gle | Overseas | DOMAIN-SUFFIX,goo.gle |
 | domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN,voice.telephony.goog |
 | domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,cloud.cupronickel.goog |
-| domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,pki.goog |
 | domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,translate.goog |
 | domain_suffix | US | DOMAIN-SUFFIX,goog | Overseas | DOMAIN-SUFFIX,usercontent.goog |
 | domain_suffix | US | DOMAIN-SUFFIX,news.ycombinator.com | Overseas | DOMAIN-SUFFIX,ycombinator.com |
@@ -286,12 +298,14 @@ Detected domain suffix relationships, explicit keyword containment and overlappi
 | domain_keyword | US | DOMAIN-SUFFIX,designer.microsoft.com | Direct | DOMAIN-KEYWORD,microsoft |
 | domain_suffix | US | DOMAIN,cursor.blob.core.windows.net | Direct | DOMAIN-SUFFIX,windows.net |
 | domain_suffix | US | DOMAIN,substrate.office.com | Direct | DOMAIN-SUFFIX,office.com |
+| domain_suffix | US | DOMAIN-SUFFIX,g.cn | Direct | DOMAIN-SUFFIX,cn |
 | domain_suffix | US | DOMAIN-SUFFIX,ggpht.cn | Direct | DOMAIN-SUFFIX,cn |
 | domain_suffix | US | DOMAIN-SUFFIX,google.cn | Direct | DOMAIN-SUFFIX,cn |
 | domain_suffix | US | DOMAIN-SUFFIX,google.ms | Direct | DOMAIN-SUFFIX,ms |
 | domain_suffix | US | DOMAIN-SUFFIX,googleapis.cn | Direct | DOMAIN-SUFFIX,cn |
 | domain_suffix | US | DOMAIN-SUFFIX,googlecnapps.cn | Direct | DOMAIN-SUFFIX,cn |
 | domain_suffix | US | DOMAIN-SUFFIX,gstatic.cn | Direct | DOMAIN-SUFFIX,cn |
+| domain_suffix | US | DOMAIN-SUFFIX,gstaticcnapps.cn | Direct | DOMAIN-SUFFIX,cn |
 | domain_suffix | US | DOMAIN-SUFFIX,lat.ms | Direct | DOMAIN-SUFFIX,ms |
 | domain_suffix | US | DOMAIN-SUFFIX,openaiassets.z19.web.core.windows.net | Direct | DOMAIN-SUFFIX,windows.net |
 | domain_suffix | US | DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net | Direct | DOMAIN-SUFFIX,windows.net |

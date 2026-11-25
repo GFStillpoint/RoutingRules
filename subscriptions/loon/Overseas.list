@@ -5,7 +5,7 @@
 # SOURCE: sources/custom/Overseas.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list
 # SOURCE: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy_Domain.list
-# RULES: 6812
+# RULES: 6800
 
 DOMAIN-SUFFIX,github.com
 DOMAIN-SUFFIX,githubusercontent.com
@@ -383,7 +383,6 @@ DOMAIN-SUFFIX,ahcdn.com
 DOMAIN-SUFFIX,ai-kan.net
 DOMAIN-SUFFIX,ai-wen.net
 DOMAIN-SUFFIX,ai.dev
-DOMAIN-SUFFIX,ai.studio
 DOMAIN-SUFFIX,aidc.com.tw
 DOMAIN-SUFFIX,aihub.top
 DOMAIN-SUFFIX,aiosearch.com
@@ -533,7 +532,6 @@ DOMAIN-SUFFIX,apartmentratings.com
 DOMAIN-SUFFIX,apartments.com
 DOMAIN-SUFFIX,apat1989.org
 DOMAIN-SUFFIX,apetube.com
-DOMAIN-SUFFIX,api.ai
 DOMAIN-SUFFIX,api.amplitude.com
 DOMAIN-SUFFIX,api.mixpanel.com
 DOMAIN-SUFFIX,api.moomoobull.com
@@ -541,7 +539,6 @@ DOMAIN-SUFFIX,api.proxlet.com
 DOMAIN-SUFFIX,api.shuaiapi.com
 DOMAIN-SUFFIX,api.termius.com
 DOMAIN-SUFFIX,apiary.io
-DOMAIN-SUFFIX,apigee.com
 DOMAIN-SUFFIX,apk-dl.com
 DOMAIN-SUFFIX,apk.support
 DOMAIN-SUFFIX,apk.tw
@@ -630,7 +627,6 @@ DOMAIN-SUFFIX,atnext.com
 DOMAIN-SUFFIX,att.com
 DOMAIN-SUFFIX,audacy.com
 DOMAIN-SUFFIX,audionow.com
-DOMAIN-SUFFIX,autodraw.com
 DOMAIN-SUFFIX,av-e-body.com
 DOMAIN-SUFFIX,av.com
 DOMAIN-SUFFIX,av.movie
@@ -1115,7 +1111,6 @@ DOMAIN-SUFFIX,centauro.com.br
 DOMAIN-SUFFIX,centerforhumanreprod.com
 DOMAIN-SUFFIX,centralnation.com
 DOMAIN-SUFFIX,centurys.net
-DOMAIN-SUFFIX,certificate-transparency.org
 DOMAIN-SUFFIX,cfhks.org.hk
 DOMAIN-SUFFIX,cfos.de
 DOMAIN-SUFFIX,cfr.org
@@ -1381,7 +1376,6 @@ DOMAIN-SUFFIX,cpj.org
 DOMAIN-SUFFIX,cpu-monkey.com
 DOMAIN-SUFFIX,cq99.us
 DOMAIN-SUFFIX,crackle.com
-DOMAIN-SUFFIX,crashlytics.com
 DOMAIN-SUFFIX,crazypool.org
 DOMAIN-SUFFIX,crazys.cc
 DOMAIN-SUFFIX,crazyshit.com
@@ -4483,7 +4477,6 @@ DOMAIN-SUFFIX,pixivsketch.net
 DOMAIN-SUFFIX,pixnet.in
 DOMAIN-SUFFIX,pixnet.net
 DOMAIN-SUFFIX,pk.com
-DOMAIN-SUFFIX,pki.goog
 DOMAIN-SUFFIX,pkqjiasu.com
 DOMAIN-SUFFIX,pkuanvil.com
 DOMAIN-SUFFIX,placemix.com
@@ -6314,11 +6307,8 @@ DOMAIN-SUFFIX,webevader.org
 DOMAIN-SUFFIX,webfreer.com
 DOMAIN-SUFFIX,webjb.org
 DOMAIN-SUFFIX,weblagu.com
-DOMAIN-SUFFIX,webmproject.org
 DOMAIN-SUFFIX,webpack.de
 DOMAIN-SUFFIX,webpass.net
-DOMAIN-SUFFIX,webpkgcache.com
-DOMAIN-SUFFIX,webrtc.org
 DOMAIN-SUFFIX,webrush.net
 DOMAIN-SUFFIX,webs-tv.net
 DOMAIN-SUFFIX,websdr.org
@@ -6379,7 +6369,6 @@ DOMAIN-SUFFIX,whoer.net
 DOMAIN-SUFFIX,whotalking.com
 DOMAIN-SUFFIX,whylover.com
 DOMAIN-SUFFIX,whyx.org
-DOMAIN-SUFFIX,widevine.com
 DOMAIN-SUFFIX,wikaba.com
 DOMAIN-SUFFIX,wikawika.xyz
 DOMAIN-SUFFIX,wiki.esu.im
@@ -6579,7 +6568,6 @@ DOMAIN-SUFFIX,xn--9pr62r24a.com
 DOMAIN-SUFFIX,xn--czq75pvv1aj5c.org
 DOMAIN-SUFFIX,xn--i2ru8q2qg.com
 DOMAIN-SUFFIX,xn--kcrv3utim32hx9f6qe.com
-DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 DOMAIN-SUFFIX,xn--noss43i.com
 DOMAIN-SUFFIX,xn--oiq.cc
 DOMAIN-SUFFIX,xn--p8j9a0d9c9a.xn--q9jyb4c

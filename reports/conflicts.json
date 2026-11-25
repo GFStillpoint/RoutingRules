@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T14:25:30+00:00",
+  "generated_at": "2026-11-25T14:27:09+00:00",
   "rule_counts": {
     "US": {
-      "before": 1209,
-      "after": 1209
+      "before": 1299,
+      "after": 1299
     },
     "Crypto": {
       "before": 375,
@@ -12,11 +12,11 @@
     },
     "Overseas": {
       "before": 7019,
-      "after": 6812
+      "after": 6800
     },
     "Direct": {
       "before": 5390,
-      "after": 5387
+      "after": 5386
     }
   },
   "removed_duplicates": [
@@ -129,6 +129,15 @@
       ]
     },
     {
+      "rule": "DOMAIN-SUFFIX,ai.studio",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
       "rule": "DOMAIN-SUFFIX,aljazeera.com",
       "kept_in": [
         "US"
@@ -183,6 +192,24 @@
       ]
     },
     {
+      "rule": "DOMAIN-SUFFIX,api.ai",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,apigee.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
       "rule": "DOMAIN-SUFFIX,app-measurement.net",
       "kept_in": [
         "US"
@@ -211,6 +238,15 @@
     },
     {
       "rule": "DOMAIN-SUFFIX,asiaone.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,autodraw.com",
       "kept_in": [
         "US"
       ],
@@ -408,6 +444,15 @@
       ]
     },
     {
+      "rule": "DOMAIN-SUFFIX,certificate-transparency.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
       "rule": "DOMAIN-SUFFIX,cex.io",
       "kept_in": [
         "Crypto"
@@ -585,6 +630,16 @@
       ],
       "removed_from": [
         "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,crashlytics.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas",
+        "Direct"
       ]
     },
     {
@@ -1371,6 +1426,15 @@
       ]
     },
     {
+      "rule": "DOMAIN-SUFFIX,pki.goog",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
       "rule": "DOMAIN-SUFFIX,plus.codes",
       "kept_in": [
         "US"
@@ -1785,6 +1849,42 @@
       ]
     },
     {
+      "rule": "DOMAIN-SUFFIX,webmproject.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,webpkgcache.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,webrtc.org",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,widevine.com",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
       "rule": "DOMAIN-SUFFIX,worldbank.org",
       "kept_in": [
         "US"
@@ -1822,6 +1922,15 @@
     },
     {
       "rule": "DOMAIN-SUFFIX,x.company",
+      "kept_in": [
+        "US"
+      ],
+      "removed_from": [
+        "Overseas"
+      ]
+    },
+    {
+      "rule": "DOMAIN-SUFFIX,xn--ngstr-lra8j.com",
       "kept_in": [
         "US"
       ],
@@ -1921,13 +2030,6 @@
     },
     {
       "rule": "DOMAIN-SUFFIX,appsto.re",
-      "categories": [
-        "Overseas",
-        "Direct"
-      ]
-    },
-    {
-      "rule": "DOMAIN-SUFFIX,crashlytics.com",
       "categories": [
         "Overseas",
         "Direct"
@@ -2175,6 +2277,28 @@
         "Overseas"
       ],
       "rules": [
+        "DOMAIN-SUFFIX,gle",
+        "DOMAIN-SUFFIX,c.gle"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,gle",
+        "DOMAIN-SUFFIX,goo.gle"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Overseas"
+      ],
+      "rules": [
         "DOMAIN-SUFFIX,goog",
         "DOMAIN,voice.telephony.goog"
       ]
@@ -2188,17 +2312,6 @@
       "rules": [
         "DOMAIN-SUFFIX,goog",
         "DOMAIN-SUFFIX,cloud.cupronickel.goog"
-      ]
-    },
-    {
-      "type": "domain_suffix",
-      "categories": [
-        "US",
-        "Overseas"
-      ],
-      "rules": [
-        "DOMAIN-SUFFIX,goog",
-        "DOMAIN-SUFFIX,pki.goog"
       ]
     },
     {
@@ -2351,6 +2464,17 @@
         "Direct"
       ],
       "rules": [
+        "DOMAIN-SUFFIX,g.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
         "DOMAIN-SUFFIX,ggpht.cn",
         "DOMAIN-SUFFIX,cn"
       ]
@@ -2407,6 +2531,17 @@
       ],
       "rules": [
         "DOMAIN-SUFFIX,gstatic.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN-SUFFIX,gstaticcnapps.cn",
         "DOMAIN-SUFFIX,cn"
       ]
     },
