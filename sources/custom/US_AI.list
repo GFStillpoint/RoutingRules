@@ -76,8 +76,6 @@ DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,mistral.ai
 DOMAIN-SUFFIX,poe.com
-DOMAIN-SUFFIX,deepseek.com
-DOMAIN-SUFFIX,kimi.com
 DOMAIN-SUFFIX,manus.im
 DOMAIN-SUFFIX,genspark.ai
 DOMAIN-SUFFIX,you.com
@@ -158,7 +156,6 @@ DOMAIN-SUFFIX,luma.ai
 DOMAIN-SUFFIX,pika.art
 DOMAIN-SUFFIX,heygen.com
 DOMAIN-SUFFIX,synthesia.io
-DOMAIN-SUFFIX,klingai.com
 DOMAIN-SUFFIX,stability.ai
 DOMAIN-SUFFIX,civitai.com
 DOMAIN-SUFFIX,leonardo.ai
@@ -245,3 +242,10 @@ DOMAIN,agent-stores.s3.us-east-1.amazonaws.com
 DOMAIN,agent-stores.s3.amazonaws.com
 DOMAIN,cursor.blob.core.windows.net
 DOMAIN,accounts.spacex.ai
+
+# International AI services and region-specific endpoints
+DOMAIN-SUFFIX,kimi.ai
+DOMAIN-SUFFIX,moonshot.ai
+DOMAIN-SUFFIX,kling.ai
+DOMAIN-SUFFIX,qwen.ai
+DOMAIN,api-st.siliconflow.cn

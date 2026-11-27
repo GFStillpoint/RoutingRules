@@ -138,3 +138,28 @@ DOMAIN-SUFFIX,miui.com
 DOMAIN-SUFFIX,chinamobile.com
 DOMAIN-SUFFIX,chinaunicom.com
 
+# Mainland AI services and domestic API endpoints
+DOMAIN-SUFFIX,deepseek.com
+DOMAIN-SUFFIX,kimi.com
+DOMAIN-SUFFIX,klingai.com
+DOMAIN-SUFFIX,moonshot.cn
+DOMAIN-SUFFIX,doubao.com
+DOMAIN-SUFFIX,qianwen.com
+DOMAIN-SUFFIX,tongyi.com
+DOMAIN-SUFFIX,bigmodel.cn
+DOMAIN-SUFFIX,chatglm.cn
+DOMAIN-SUFFIX,trae.cn
+DOMAIN-SUFFIX,trae.com.cn
+DOMAIN-SUFFIX,minimaxi.com
+DOMAIN-SUFFIX,minimax.cn
+DOMAIN-SUFFIX,hailuoai.com
+DOMAIN-SUFFIX,coze.cn
+DOMAIN-SUFFIX,siliconflow.cn
+DOMAIN-SUFFIX,stepfun.com
+DOMAIN-SUFFIX,metaso.cn
+DOMAIN-SUFFIX,workbuddy.cn
+DOMAIN-SUFFIX,xfyun.cn
+DOMAIN-SUFFIX,volcengine.com
+DOMAIN-SUFFIX,dashscope.aliyuncs.com
+DOMAIN-SUFFIX,cn-beijing.maas.aliyuncs.com
+DOMAIN-SUFFIX,yuanbao.tencent.com
