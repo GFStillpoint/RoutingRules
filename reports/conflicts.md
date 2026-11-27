@@ -1,6 +1,6 @@
 # Rule conflicts / 规则冲突报告
 
-Generated / 检测时间: `2026-11-27T08:21:50+00:00`
+Generated / 检测时间: `2026-11-27T09:21:34+00:00`
 
 [JSON data / 结构化数据](conflicts.json)
 
@@ -10,10 +10,10 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 
 | Category / 分类 | Before / 处理前 | After / 处理后 |
 | --- | ---: | ---: |
-| US | 1299 | 1299 |
+| US | 1301 | 1301 |
 | Crypto | 375 | 375 |
 | Overseas | 7019 | 6800 |
-| Direct | 5390 | 5386 |
+| Direct | 5414 | 5410 |
 
 ## Removed exact duplicates / 已去重 (222)
 
@@ -254,7 +254,7 @@ Specialized rules (US, Crypto) take precedence over exact duplicates in general 
 | USER-AGENT,com.apple.trustd* | Overseas, Direct |
 | USER-AGENT,hearthstone* | Overseas, Direct |
 
-## Structural overlaps / 匹配范围重叠 (105)
+## Structural overlaps / 匹配范围重叠 (107)
 
 Detected domain suffix relationships, explicit keyword containment and overlapping IP networks. These are structural checks, not exhaustive runtime matches. / 检测域名后缀、明确的关键词包含关系及 IP 网段重叠；不等同于实际流量匹配的穷尽检测。
 
@@ -296,6 +296,8 @@ Detected domain suffix relationships, explicit keyword containment and overlappi
 | domain_keyword | US | DOMAIN-SUFFIX,copilot.cloud.microsoft | Direct | DOMAIN-KEYWORD,microsoft |
 | domain_keyword | US | DOMAIN-SUFFIX,copilot.microsoft.com | Direct | DOMAIN-KEYWORD,microsoft |
 | domain_keyword | US | DOMAIN-SUFFIX,designer.microsoft.com | Direct | DOMAIN-KEYWORD,microsoft |
+| domain_suffix | US | DOMAIN,api-st.siliconflow.cn | Direct | DOMAIN-SUFFIX,cn |
+| domain_suffix | US | DOMAIN,api-st.siliconflow.cn | Direct | DOMAIN-SUFFIX,siliconflow.cn |
 | domain_suffix | US | DOMAIN,cursor.blob.core.windows.net | Direct | DOMAIN-SUFFIX,windows.net |
 | domain_suffix | US | DOMAIN,substrate.office.com | Direct | DOMAIN-SUFFIX,office.com |
 | domain_suffix | US | DOMAIN-SUFFIX,g.cn | Direct | DOMAIN-SUFFIX,cn |

@@ -5,7 +5,7 @@
 # SOURCE: sources/custom/US_AI.list
 # SOURCE: sources/custom/US_Google.list
 # SOURCE: sources/custom/US_Finance.list
-# RULES: 1299
+# RULES: 1301
 
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,chatgpt.com
@@ -71,8 +71,6 @@ DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,mistral.ai
 DOMAIN-SUFFIX,poe.com
-DOMAIN-SUFFIX,deepseek.com
-DOMAIN-SUFFIX,kimi.com
 DOMAIN-SUFFIX,manus.im
 DOMAIN-SUFFIX,genspark.ai
 DOMAIN-SUFFIX,you.com
@@ -145,7 +143,6 @@ DOMAIN-SUFFIX,luma.ai
 DOMAIN-SUFFIX,pika.art
 DOMAIN-SUFFIX,heygen.com
 DOMAIN-SUFFIX,synthesia.io
-DOMAIN-SUFFIX,klingai.com
 DOMAIN-SUFFIX,stability.ai
 DOMAIN-SUFFIX,civitai.com
 DOMAIN-SUFFIX,leonardo.ai
@@ -214,6 +211,11 @@ DOMAIN,agent-stores.s3.us-east-1.amazonaws.com
 DOMAIN,agent-stores.s3.amazonaws.com
 DOMAIN,cursor.blob.core.windows.net
 DOMAIN,accounts.spacex.ai
+DOMAIN-SUFFIX,kimi.ai
+DOMAIN-SUFFIX,moonshot.ai
+DOMAIN-SUFFIX,kling.ai
+DOMAIN-SUFFIX,qwen.ai
+DOMAIN,api-st.siliconflow.cn
 DOMAIN-SUFFIX,storage.googleapis.com
 DOMAIN-SUFFIX,i.ytimg.com
 DOMAIN-SUFFIX,yt3.ggpht.com

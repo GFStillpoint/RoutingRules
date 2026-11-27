@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-27T08:21:50+00:00",
+  "generated_at": "2026-11-27T09:21:34+00:00",
   "rule_counts": {
     "US": {
-      "before": 1299,
-      "after": 1299
+      "before": 1301,
+      "after": 1301
     },
     "Crypto": {
       "before": 375,
@@ -15,8 +15,8 @@
       "after": 6800
     },
     "Direct": {
-      "before": 5390,
-      "after": 5386
+      "before": 5414,
+      "after": 5410
     }
   },
   "removed_duplicates": [
@@ -2433,6 +2433,28 @@
       "rules": [
         "DOMAIN-SUFFIX,designer.microsoft.com",
         "DOMAIN-KEYWORD,microsoft"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,api-st.siliconflow.cn",
+        "DOMAIN-SUFFIX,cn"
+      ]
+    },
+    {
+      "type": "domain_suffix",
+      "categories": [
+        "US",
+        "Direct"
+      ],
+      "rules": [
+        "DOMAIN,api-st.siliconflow.cn",
+        "DOMAIN-SUFFIX,siliconflow.cn"
       ]
     },
     {
