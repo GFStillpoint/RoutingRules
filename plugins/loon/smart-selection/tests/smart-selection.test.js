@@ -8,7 +8,7 @@ function mockTests(factory){
       const groups=custom.groups||{"所有可用线路":["JP-fast","JP-slow","US","HK","DIRECT","剩余流量: 100 GB"],"美国线路":["US"],"香港线路":["HK"],"日本线路":["JP-fast","JP-slow"]};
       const selected=custom.selected||{"所有可用线路":"JP-slow","美国线路":"US","香港线路":"HK","日本线路":"JP-slow"};
       const api={now:()=>time,random:()=>.123,config:()=>JSON.stringify({all_policy_groups:Object.keys(groups),all_buildin_nodes:["DIRECT","REJECT"],ssid:"mock-wifi"}),members:(n,cb)=>cb(JSON.stringify(custom.typed?groups[n].map(x=>typeof x==="string"?{name:x,type:Object.prototype.hasOwnProperty.call(groups,x)?"group":"node"}:x):groups[n])),selected:n=>selected[n]||"",read:k=>store.get(k)||"",write:(k,v)=>{writes++;if(custom.writeFail)return false;store.set(k,v);return true;},timer:()=>0,clear:()=>{},log:s=>logs.push(s),request:(method,o,cb)=>{
-        calls.push({method,node:o.node,url:o.url,secure:o.insecure===false});
+        calls.push({method,node:o.node,url:o.url,timeout:o.timeout,secure:o.insecure===false});
         let fail=(custom.fail||[]).includes(o.node);
         if(fail){time+=1000;cb("timeout",null,null);return;}
         const m=/bytes=(\d+)/.exec(o.url),n=m?Number(m[1]):0;
@@ -71,6 +71,15 @@ function mockTests(factory){
     const many=mock({groups:{A:Array.from({length:12},(_,i)=>"node-"+i)},selected:{A:"node-0"}});
     const mr2=(await factory(many.api).run({}, {tag:"一键诊断"})).report;
     check(mr2.batch.tested.length<=6&&mr2.batch.remainingThisRun>0&&mr2.batch.stopReason==="达到单轮节点上限","bounded one-click coverage is explicit");
+    check(r.groups[3].rows[0].deviation===null,"no cross-target jitter from single round");
+    const repeat=await core.run({},{});check(repeat.report.groups[3].rows[0].deviation===0,"same-target repeat variation");
+    check(m.calls.every(x=>x.timeout===(x.method==="head"?5000:15000)),"separate lightweight and download timeouts");
+    const mismatch=mock({groups:{HK:["HK中转②"]},selected:{HK:"HK节点(中转)②"}});
+    const mm=(await factory(mismatch.api).run({}, {tag:"一键诊断"})).report;
+    check(mm.groups[0].selectedInCandidates===false&&mm.diagnostic.checks.selectedMembership==="mismatch_or_unknown","selection name mismatch flagged");
+    check(mismatch.calls.every(x=>x.node==="HK中转②"),"no fuzzy route substitution");
+    const follow=(await factory(many.api).run({}, {tag:"一键诊断"})).report;
+    check(follow.batch.tested.every(x=>!mr2.batch.tested.includes(x)),"unattempted nodes prioritized next round");
     return {passed};
   })();
 }

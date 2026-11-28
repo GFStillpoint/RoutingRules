@@ -1,6 +1,10 @@
 # Smart Selection / 智能线路优选
 
-**V0.1.2 — experimental, detection only / 真机测试版，仅检测。**
+**V0.1.3 — experimental, detection only / 真机测试版，仅检测。**
+
+## 0.1.3
+
+真机测试后调整：轻量请求超时 5 秒，下载 15 秒；回调 watchdog 额外 4 秒，未确认请求结束时仍安全停止。优先补测未尝试节点；已选节点名称不匹配时明确标注，绝不模糊匹配。耗时波动仅比较同一目标的重复请求；首轮缺少波动数据时按其余权重归一化，仍标为初步。旧记录无需迁移。
 
 ## 0.1.2
 
@@ -26,7 +30,7 @@ Loon 3.5.1 (983)+: add [Smart_Selection.plugin](https://raw.githubusercontent.co
 
 Two independent HTTPS HEAD targets (Google and Apple), plus Cloudflare 2 MB download with optional 5 MB refinement for short samples. Requests are serial, directed to named leaf nodes, with certificate checks and redirects/cookies disabled. A valid download must be binary, HTTP 200 and exactly the requested length. The rate includes all request overhead; it is not peak link bandwidth. The second throughput provider and active egress-IP verification are not implemented in V0.1; compare with external speed tests and Loon request records before trusting routing decisions.
 
-评分：40%有效吞吐量、20% HTTP 响应时间、30%历史请求成功率、10%耗时波动；速度效用随速度递增而趋于饱和。成功率指探测请求成功率，不是网络丢包率。历史使用近期加权；只有最新有效下载才允许评分；样本不足明确标注。共享数据按网络标识和节点名称复用，各组独立排序。节点名称是临时标识；同名节点在订阅更新后可能发生变化。Wi-Fi SSID 仅本地保存非加密哈希；其他网络身份未核实，历史最多使用 2 小时，不视为独立蜂窝识别。叶子节点之外的嵌套策略、内置策略和常见公告伪节点跳过，不会自行跨组。
+评分：40%有效吞吐量、20% HTTP 响应时间、30%历史请求成功率、10%同一目标重复请求耗时波动（缺失时其余权重归一化）；速度效用随速度递增而趋于饱和。成功率指探测请求成功率，不是网络丢包率。历史使用近期加权；只有最新有效下载才允许评分；样本不足明确标注。共享数据按网络标识和节点名称复用，各组独立排序。节点名称是临时标识；同名节点在订阅更新后可能发生变化。Wi-Fi SSID 仅本地保存非加密哈希；其他网络身份未核实，历史最多使用 2 小时，不视为独立蜂窝识别。叶子节点之外的嵌套策略、内置策略和常见公告伪节点跳过，不会自行跨组。
 
 Budget reserves requested bytes plus 16 KB per request before sending; timeouts and interrupted attempts remain charged. It is an estimate, not actual carrier accounting; oversized responses and transport overhead can exceed estimates. No extra downloads once the daily budget or per-run cap is insufficient. Device local day resets the shared ledger. The storage lease is best-effort, not an atomic lock. Do not overlap manual and scheduled tests until verified. All measurements and reports stay in local script storage/logs. Probe endpoints see the usual network request metadata. No credentials, SSID text or public IP are intentionally logged.
 

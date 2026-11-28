@@ -1,8 +1,8 @@
-// Smart Selection 0.1.2 | RoutingRules | detection only
+// Smart Selection 0.1.3 | RoutingRules | detection only
 // Loon 3.5.1 (983)+. No policy writes, MitM, or credential collection.
 function createSmartSelection(api) {
   "use strict";
-  const VERSION="0.1.2", KEY="routingrules.smart-selection.v1", LOCK=KEY+".lease";
+  const VERSION="0.1.3", KEY="routingrules.smart-selection.v1", LOCK=KEY+".lease";
   const MB=1000000, H=3600000, BATCH=6, RUN_BYTES=16*MB, RUN_MS=155000;
   const now=api.now, own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
   const unique=a=>Array.from(new Set(a));
@@ -139,29 +139,35 @@ function createSmartSelection(api) {
     const lat=samples.flatMap(x=>Array.isArray(x.lat)?x.lat:[]);
     const down=samples.filter(x=>Number.isFinite(x.mbps));
     const success=100*samples.reduce((a,x)=>a+x.ok,0)/Math.max(1,samples.reduce((a,x)=>a+x.attempts,0));
-    const delay=median(lat), deviation=delay==null?null:median(lat.map(x=>Math.abs(x-delay)));
+    const delay=median(lat);
+    // Compare repeat observations of the same target, not Apple against Google.
+    const targetLats=["Google","Apple"].map(target=>samples.flatMap(x=>(x.targets||[]).filter(y=>y.target===target&&y.ok&&Number.isFinite(y.ms)).map(y=>y.ms)));
+    const deviations=targetLats.filter(a=>a.length>=2).map(a=>{const m=median(a);return median(a.map(x=>Math.abs(x-m)));});
+    const deviation=median(deviations);
     let speed=null;
     if(down.length){let num=0,den=0;down.forEach((x,i)=>{const w=Math.pow(.65,down.length-1-i);num+=x.mbps*w;den+=w;});speed=num/den;}
     const q={status:"样本不足",score:null,delay,speed,success,deviation,samples:samples.length,last:latest.at,lastError:latest.error||null};
-    if(latest.ok===0){q.status="最近连接失败";return q;}
+    if(latest.ok===0){q.status=String(latest.error||"").includes("回调超时")?"回调超时·待复核":"最近连接失败";return q;}
     if(!latest.mbps||speed==null||delay==null){q.status="待有效下载";return q;}
-    const v=100*Math.min(1,Math.log(1+speed)/Math.log(51)), l=100*Math.exp(-Math.max(0,delay-50)/350), j=100*Math.exp(-deviation/100);
-    q.score=Math.round((.4*v+.2*l+.3*success+.1*j)*10)/10;
-    q.status=latest.ok<latest.attempts?"部分失败":(!net.known||down.length<2?"初步":"已复测");
+    const v=100*Math.min(1,Math.log(1+speed)/Math.log(51)), l=100*Math.exp(-Math.max(0,delay-50)/350), j=deviation==null?null:100*Math.exp(-deviation/100);
+    q.score=Math.round(((.4*v+.2*l+.3*success+(j==null?0:.1*j))/(j==null?.9:1))*10)/10;
+    q.status=latest.ok<latest.attempts?"部分失败":(!net.known||down.length<2||deviation==null?"初步":"已复测");
     return q;
   }
   function queue(groups,s,net){
     const valid=groups.filter(g=>g.nodes.length);
     if(!valid.length)return [];
-    const current=unique(valid.map(g=>g.selected).filter(x=>valid.some(g=>g.nodes.includes(x))));
+    const current=unique(valid.filter(g=>g.nodes.includes(g.selected)).map(g=>g.selected));
     // Round-robin group ordering across batches; at least one oldest candidate per group.
     const offset=(s.cursor||0)%valid.length;
     const ordered=valid.slice(offset).concat(valid.slice(0,offset));
     const oldest=g=>g.nodes.slice().sort((a,b)=>(getRecord(s,net,a)?.lastAttempt||0)-(getRecord(s,net,b)?.lastAttempt||0)||a.localeCompare(b));
     const lists=ordered.map(oldest);
-    const urgent=ordered.map(g=>g.selected).filter(x=>current.includes(x)&&(!getRecord(s,net,x)||now()-getRecord(s,net,x).lastAttempt>=H));
+    const urgent=ordered.filter(g=>g.nodes.includes(g.selected)).map(g=>g.selected).filter(x=>current.includes(x)&&(!getRecord(s,net,x)||now()-getRecord(s,net,x).lastAttempt>=H));
+    const unseen=unique(lists.flat().filter(x=>!getRecord(s,net,x)));
     const first=lists.map(a=>a[0]);
-    const merged=unique(first.concat(urgent));
+    // First-time coverage takes precedence over retesting previously attempted nodes.
+    const merged=unique(urgent.filter(x=>unseen.includes(x)).concat(unseen,urgent,first));
     for(let i=1;i<Math.max(...lists.map(a=>a.length));i++)for(const a of lists)if(a[i]!==undefined&&!merged.includes(a[i]))merged.push(a[i]);
     return merged;
   }
@@ -176,8 +182,9 @@ function createSmartSelection(api) {
     const allowance=bytes+16000;
     if(!reserve(s,opts,run,allowance,token))return {skipped:true};
     const start=now();
-    const options={url,node,timeout:12000,"binary-mode":true,"auto-redirect":false,"auto-cookie":false,insecure:false,headers:{"Cache-Control":"no-cache, no-store","Pragma":"no-cache","Accept-Encoding":"identity"}};
-    const r=await callbackCall(cb=>api.request(method,options,(err,res,data)=>cb({err,res,data})),14500);
+    const timeout=method==="head"?5000:15000;
+    const options={url,node,timeout,"binary-mode":true,"auto-redirect":false,"auto-cookie":false,insecure:false,headers:{"Cache-Control":"no-cache, no-store","Pragma":"no-cache","Accept-Encoding":"identity"}};
+    const r=await callbackCall(cb=>api.request(method,options,(err,res,data)=>cb({err,res,data})),timeout+4000);
     const elapsed=Math.max(1,now()-start);
     let n=0;
     if(r.data&&typeof r.data.byteLength==="number")n=r.data.byteLength;
@@ -196,7 +203,7 @@ function createSmartSelection(api) {
   }
   async function probe(node,s,opts,run,token){
     const p={at:now(),lat:[],ok:0,attempts:0,mbps:null,bytes:0,error:null,targets:[]};
-    const can=()=>!run.stop&&now()-run.start<RUN_MS-16000;
+    const can=()=>!run.stop&&now()-run.start<RUN_MS-20000;
     for(const [url,status] of [["https://www.gstatic.com/generate_204",204],["https://www.apple.com/library/test/success.html",200]]){
       if(!can())break;
       const r=await request(node,url,"head",0,s,opts,run,token);
@@ -230,7 +237,7 @@ function createSmartSelection(api) {
         remainingThisRun:unique(groups.flatMap(g=>g.nodes)).filter(x=>!run.tested.includes(x)).length,
         samples:run.samples||[]}:null,
       groups:groups.map(g=>{const rows=g.nodes.map(node=>({node,current:node===g.selected,...quality(getRecord(s,net,node),net,now())})).sort((a,b)=>(b.score??-1)-(a.score??-1)||a.node.localeCompare(b.node));
-        return {name:g.name,selected:g.selected,count:g.nodes.length,skipped:g.skipped,error:g.error,discovery:g.discovery,ranked:rows.filter(r=>r.score!=null).length,rows};})};
+        return {name:g.name,selected:g.selected,selectedInCandidates:g.nodes.includes(g.selected),count:g.nodes.length,skipped:g.skipped,error:g.error,discovery:g.discovery,ranked:rows.filter(r=>r.score!=null).length,rows};})};
   }
   function summary(r){
     const lines=[`Smart Selection ${r.version} · 只检测`,`${r.network}｜今日预算 ${r.chargedMB}/${r.budgetMB} MB（预扣估算）`];
@@ -238,7 +245,7 @@ function createSmartSelection(api) {
     for(const g of r.groups){
       lines.push(`\n${g.name} · ${g.ranked}/${g.count} 已评分${g.skipped?" · 排除 "+g.skipped:""}`);
       if(g.error){lines.push(g.error);continue;}
-      lines.push("当前："+(g.selected||"未知"));
+      lines.push("当前："+(g.selected||"未知")+(g.selected&&!g.selectedInCandidates?"（未与候选名称精确匹配）":""));
       for(const x of g.rows.slice(0,5))lines.push(`${x.current?"●":"○"} ${x.node}｜${x.score??"—"} 分｜${format(x.delay)} ms｜${format(x.speed)} Mbps｜${x.status}`);
       if(g.rows.length>5)lines.push("其余节点详见脚本日志");
     }
@@ -263,7 +270,7 @@ function createSmartSelection(api) {
       for(const node of candidates){
         if(run.stop){run.stopReason="请求异常，提前结束";break;}
         if(run.tested.length>=BATCH){run.stopReason="达到单轮节点上限";break;}
-        if(now()-run.start>RUN_MS-16000){run.stopReason="达到单轮时间上限";break;}
+        if(now()-run.start>RUN_MS-20000){run.stopReason="达到单轮时间上限";break;}
         if(s.charged+2*MB+48000>opts.budget){run.stopReason="当日剩余预算不足";break;}
         if(run.charged+2*MB+48000>RUN_BYTES){run.stopReason="达到单轮流量上限";break;}
         // Abort if identified Wi-Fi changes during a batch.
@@ -277,6 +284,7 @@ function createSmartSelection(api) {
       report.diagnostic={schema:1,generatedAt:new Date(now()).toISOString(),scope:unified?"all_configured_groups":"configured_scope",checks:{
         groupDiscovery:groups.length>0&&groups.every(g=>!g.error)?"pass":groups.some(g=>!g.error)?"partial":"fail",
         selectedRead:groups.every(g=>g.selected)?"pass":"partial",
+        selectedMembership:groups.every(g=>g.selected&&g.nodes.includes(g.selected))?"pass":"mismatch_or_unknown",
         lightProbe:run.samples.some(x=>x.sample.lat.length)?"pass":run.samples.length?"no_success":"not_run",
         downloadProbe:run.samples.some(x=>x.sample.mbps!=null)?"pass":run.samples.length?"no_valid_download":"not_run",
         sharedBudget:s.charged<=opts.budget?"within_limit":"over_estimate",
