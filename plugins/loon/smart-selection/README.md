@@ -1,0 +1,39 @@
+# Smart Selection / 智能线路优选
+
+**V0.1.0 — experimental, detection only / 真机测试版，仅检测。**
+
+## 安装 / Install
+
+Loon 3.5.1 (983)+: add [Smart_Selection.plugin](https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/plugins/loon/Smart_Selection.plugin) as a remote plugin. 不需要修改现有 url-test 策略组、规则、MitM 或订阅。
+
+- 每日预算默认 200 MB，全部组共享；可选 50/100/200/300 MB。
+- 策略组留空自动发现；也可填写 `所有可用线路;美国线路;香港线路;日本线路`。
+- 首次保持定时检测关闭，从 Generic 手动入口运行「Smart Selection · 线路检测」。每轮最多 6 个去重节点、16 MB 预扣预算、约 155 秒测速时间（另有发现及收尾开销）。
+- 在「质量报告」查看独立组排名；完整逐节点 JSON 与错误类型在脚本日志。多运行几轮，未测节点会轮询进入队列。
+- 若入口允许传入策略组或节点上下文，检测限于该范围；入口参数形式需真机验证。
+- 确认实测正常后，可选开启每 30 分钟巡检。iOS 后台调度不保证准时。
+- 原生 url-test 仍可能自行切换；本插件没有任何策略修改调用。
+
+## 测量与限制 / Measurement and limitations
+
+Two independent HTTPS HEAD targets (Google and Apple), plus Cloudflare 2 MB download with optional 5 MB refinement for short samples. Requests are serial, directed to named leaf nodes, with certificate checks and redirects/cookies disabled. A valid download must be binary, HTTP 200 and exactly the requested length. The rate includes all request overhead; it is not peak link bandwidth. The second throughput provider and active egress-IP verification are not implemented in V0.1; compare with external speed tests and Loon request records before trusting routing decisions.
+
+评分：40%有效吞吐量、20% HTTP 响应时间、30%历史请求成功率、10%耗时波动；速度效用随速度递增而趋于饱和。成功率指探测请求成功率，不是网络丢包率。历史使用近期加权；只有最新有效下载才允许评分；样本不足明确标注。共享数据按网络标识和节点名称复用，各组独立排序。节点名称是临时标识；同名节点在订阅更新后可能发生变化。Wi-Fi SSID 仅本地保存非加密哈希；其他网络身份未核实，历史最多使用 2 小时，不视为独立蜂窝识别。叶子节点之外的嵌套策略、内置策略和常见公告伪节点跳过，不会自行跨组。
+
+Budget reserves requested bytes plus 16 KB per request before sending; timeouts and interrupted attempts remain charged. It is an estimate, not actual carrier accounting; oversized responses and transport overhead can exceed estimates. No extra downloads once the daily budget or per-run cap is insufficient. Device local day resets the shared ledger. The storage lease is best-effort, not an atomic lock. Do not overlap manual and scheduled tests until verified. All measurements and reports stay in local script storage/logs. Probe endpoints see the usual network request metadata. No credentials, SSID text or public IP are intentionally logged.
+
+## 真机验收 / Device acceptance
+
+1. 四组名称及候选数与 Loon 实际界面对照。报告中显示未测试、被跳过及错误状态。
+2. 选择快慢明显的两条节点，重复检测并通过相同节点运行独立测速；记录 Loon 请求日志的实际节点以确认显式路由。
+3. 核对各组排序、有效吞吐量、预扣预算、实际流量记录；重复节点不应在同一批反复下载（自适应复测除外）。
+4. 测试超时、断网、节点移除、Wi-Fi/蜂窝切换；保存 JSON 日志及 Loon 版本。不需要提供机场订阅 URL、密码或节点密钥。
+5. V0.1 通过真机验收之后才进入 V0.2 自动接管；V1.0 在持续使用、回归测试及文档完善后发布。
+
+## Tests
+
+`node plugins/loon/smart-selection/tests/smart-selection.test.js`
+
+Mocked Loon adapters cover group discovery/isolation, shared probing, ranking, budget, invalid data, failure and read-only behavior. They do not emulate iOS networking or Loon plugin parsing.
+
+References: [Loon Script API](https://nsloon.app/docs/Script/script_api/), [Plugin arguments](https://nsloon.app/docs/Plugin/), [Script syntax](https://nsloon.app/docs/Script/script_v2/), [Cloudflare speedtest](https://github.com/cloudflare/speedtest).

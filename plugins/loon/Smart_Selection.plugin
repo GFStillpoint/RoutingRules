@@ -1,0 +1,14 @@
+#!name = Smart Selection
+#!desc = 多策略组线路质量检测（V0.1）；独立排名，不自动切换。
+#!system = iOS,iPadOS
+#!loon_version = 3.5.1(983)
+
+[Argument]
+dailyMB = select,200,100,50,300,type=number,tag=每日下载预算（MB）,desc=所有策略组共享的预扣预算
+groups = input,"",type=string,tag=策略组名称,desc=留空发现全部策略组；多个组用英文分号隔开
+autoProbe = switch,false,type=boolean,tag=定时检测,desc=默认关闭；开启后每30分钟分批检测
+
+[Script]
+generic then script("https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/plugins/loon/smart-selection/Smart_Selection.js", {${dailyMB}, ${groups}}) with tag="Smart Selection · 线路检测", timeout=220, img_url="gauge.system"
+generic then script("https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/plugins/loon/smart-selection/Smart_Selection.js", {${dailyMB}, ${groups}}) with tag="Smart Selection · 质量报告", timeout=220, img_url="list.bullet.system"
+cron "*/30 * * * *" then script("https://raw.githubusercontent.com/GFStillpoint/RoutingRules/main/plugins/loon/smart-selection/Smart_Selection.js", {${dailyMB}, ${groups}}) with enable=${autoProbe}, tag="Smart Selection · 定时检测", timeout=220

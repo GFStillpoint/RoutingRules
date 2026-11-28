@@ -1,0 +1,26 @@
+name: Smart Selection tests
+on:
+  push:
+    paths:
+      - 'plugins/loon/Smart_Selection.plugin'
+      - 'plugins/loon/smart-selection/**'
+      - '.github/workflows/smart-selection-tests.yml'
+  pull_request:
+    paths:
+      - 'plugins/loon/Smart_Selection.plugin'
+      - 'plugins/loon/smart-selection/**'
+      - '.github/workflows/smart-selection-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check plugins/loon/smart-selection/Smart_Selection.js
+      - run: node plugins/loon/smart-selection/tests/smart-selection.test.js
