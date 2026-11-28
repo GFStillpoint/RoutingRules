@@ -1,8 +1,8 @@
-// Smart Selection 0.1.0 | RoutingRules | detection only
+// Smart Selection 0.1.1 | RoutingRules | detection only
 // Loon 3.5.1 (983)+. No policy writes, MitM, or credential collection.
 function createSmartSelection(api) {
   "use strict";
-  const VERSION="0.1.0", KEY="routingrules.smart-selection.v1", LOCK=KEY+".lease";
+  const VERSION="0.1.1", KEY="routingrules.smart-selection.v1", LOCK=KEY+".lease";
   const MB=1000000, H=3600000, BATCH=6, RUN_BYTES=16*MB, RUN_MS=155000;
   const now=api.now, own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
   const unique=a=>Array.from(new Set(a));
@@ -80,14 +80,29 @@ function createSmartSelection(api) {
       groups.push(g);
       if(!known.has(name)){g.error="策略组不存在";continue;}
       try{
+        try{const selected=api.selected(name);g.selected=validName(selected)?selected:"";}catch(_){}
         const r=await callbackCall(cb=>api.members(name,x=>cb({value:x})),3500);
         if(r.watchdog||r.error)throw Error("候选节点读取超时或失败");
-        const a=safeParse(r.value);
-        if(!Array.isArray(a)||!a.every(validName))throw Error("候选节点返回格式未识别");
-        const selected=api.selected(name);
-        g.selected=validName(selected)?selected:"";
-        g.nodes=unique(a.filter(x=>!known.has(x)&&!built.has(x)&&!builtIn(x)&&!pseudo(x)));
-        g.skipped=unique(a).length-g.nodes.length;
+        const a=r.value===""||r.value==null?[]:safeParse(r.value);
+        // Loon returns JSON arrays of {name,type} in actual clients.
+        // Accept legacy name strings too; never probe typed non-node policies.
+        if(!Array.isArray(a)){
+          api.log(JSON.stringify({group:name,discovery:{array:false,kind:typeof a}}));
+          throw Error("候选节点返回格式未识别");
+        }
+        const names=[], shape={strings:0,nodes:0,nonNodes:0,unknown:0};
+        for(const item of a){
+          if(validName(item)){shape.strings++;names.push(item);}
+          else if(item&&typeof item==="object"&&validName(item.name)&&typeof item.type==="string"){
+            if(item.type.toLowerCase()==="node"){shape.nodes++;names.push(item.name);}
+            else shape.nonNodes++;
+          }else shape.unknown++;
+        }
+        // Log only shape counts, not raw node descriptions or secrets.
+        api.log(JSON.stringify({group:name,discovery:{total:a.length,...shape}}));
+        if(a.length&&shape.strings+shape.nodes+shape.nonNodes===0)throw Error("候选节点条目格式未识别");
+        g.nodes=unique(names.filter(x=>!known.has(x)&&!built.has(x)&&!builtIn(x)&&!pseudo(x)));
+        g.skipped=a.length-g.nodes.length;
         if(context.node)g.nodes=g.nodes.filter(x=>x===context.node);
         if(!g.nodes.length)g.error="无可直接测速的叶子节点";
       }catch(e){g.error=e.message;}

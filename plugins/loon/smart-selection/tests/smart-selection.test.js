@@ -7,7 +7,7 @@ function mockTests(factory){
       let time=Date.UTC(2026,10,28,8),store=new Map(),calls=[],logs=[],writes=0;
       const groups=custom.groups||{"所有可用线路":["JP-fast","JP-slow","US","HK","DIRECT","剩余流量: 100 GB"],"美国线路":["US"],"香港线路":["HK"],"日本线路":["JP-fast","JP-slow"]};
       const selected=custom.selected||{"所有可用线路":"JP-slow","美国线路":"US","香港线路":"HK","日本线路":"JP-slow"};
-      const api={now:()=>time,random:()=>.123,config:()=>JSON.stringify({all_policy_groups:Object.keys(groups),all_buildin_nodes:["DIRECT","REJECT"],ssid:"mock-wifi"}),members:(n,cb)=>cb(JSON.stringify(groups[n])),selected:n=>selected[n]||"",read:k=>store.get(k)||"",write:(k,v)=>{writes++;if(custom.writeFail)return false;store.set(k,v);return true;},timer:()=>0,clear:()=>{},log:s=>logs.push(s),request:(method,o,cb)=>{
+      const api={now:()=>time,random:()=>.123,config:()=>JSON.stringify({all_policy_groups:Object.keys(groups),all_buildin_nodes:["DIRECT","REJECT"],ssid:"mock-wifi"}),members:(n,cb)=>cb(JSON.stringify(custom.typed?groups[n].map(x=>typeof x==="string"?{name:x,type:Object.prototype.hasOwnProperty.call(groups,x)?"group":"node"}:x):groups[n])),selected:n=>selected[n]||"",read:k=>store.get(k)||"",write:(k,v)=>{writes++;if(custom.writeFail)return false;store.set(k,v);return true;},timer:()=>0,clear:()=>{},log:s=>logs.push(s),request:(method,o,cb)=>{
         calls.push({method,node:o.node,url:o.url,secure:o.insecure===false});
         let fail=(custom.fail||[]).includes(o.node);
         if(fail){time+=1000;cb("timeout",null,null);return;}
@@ -52,6 +52,16 @@ function mockTests(factory){
     check(gr.groups.length===1&&g.calls.every(x=>x.node.startsWith("JP")),"manual group scope");
     const z=mock();z.store.set("routingrules.smart-selection.v1","not-json");let err=false;try{await factory(z.api).run({},{});}catch(_){err=true;}
     check(err&&z.calls.length===0,"corrupt state fail closed");
+    const typed=mock({typed:true}),tr=(await factory(typed.api).run({},{})).report;
+    check(tr.groups[0].count===4&&tr.groups[3].ranked===2,"Loon typed object arrays parsed");
+    check(tr.groups[3].selected==="JP-slow"&&tr.groups[3].rows[0].node==="JP-fast","typed nodes retain current selection and ranking");
+    const mixed=mock({typed:true,groups:{A:["B","JP-fast",{name:"unexpected",type:"other"},{bad:true}],B:["JP-fast","DIRECT"]},selected:{A:"B",B:"JP-fast"}});
+    const mr=(await factory(mixed.api).run({},{})).report;
+    check(mr.groups[0].count===1&&mr.groups[0].skipped===3,"typed non-node and unknown entries excluded");
+    check(mixed.calls.every(x=>x.node==="JP-fast"),"never probe unknown object or nested group");
+    const empty=mock({groups:{A:[{bad:true}]},selected:{A:"old"}}),er=(await factory(empty.api).run({},{})).report;
+    check(er.groups[0].error==="候选节点条目格式未识别"&&er.groups[0].selected==="old"&&empty.calls.length===0,"malformed entries fail safely, selected preserved");
+    check(typed.logs.some(x=>x.includes('"nodes":')),"safe shape-only discovery diagnostics");
     return {passed};
   })();
 }

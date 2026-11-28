@@ -1,6 +1,10 @@
 # Smart Selection / 智能线路优选
 
-**V0.1.0 — experimental, detection only / 真机测试版，仅检测。**
+**V0.1.1 — experimental, detection only / 真机测试版，仅检测。**
+
+## 0.1.1
+
+修复真机候选节点对象数组解析：支持 `{name,type}` 和旧版名称字符串数组；仅检测叶子节点，未知类型跳过；日志新增数据结构计数，不输出原始节点描述。保留既有本地预算与历史记录。
 
 ## 安装 / Install
 
