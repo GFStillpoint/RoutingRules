@@ -62,6 +62,15 @@ function mockTests(factory){
     const empty=mock({groups:{A:[{bad:true}]},selected:{A:"old"}}),er=(await factory(empty.api).run({},{})).report;
     check(er.groups[0].error==="候选节点条目格式未识别"&&er.groups[0].selected==="old"&&empty.calls.length===0,"malformed entries fail safely, selected preserved");
     check(typed.logs.some(x=>x.includes('"nodes":')),"safe shape-only discovery diagnostics");
+    const one=mock({typed:true}),oneResult=(await factory(one.api).run({dailyMB:200},{tag:"Smart Selection · 一键诊断",group:"日本线路",node:"JP-fast"})).report;
+    check(oneResult.groups.length===4&&oneResult.diagnostic.scope==="all_configured_groups","one click includes all configured groups");
+    check(oneResult.batch.samples.length===oneResult.batch.tested.length&&oneResult.batch.samples.every(x=>x.sample.targets.length>0),"consolidated raw per-node probes");
+    check(oneResult.groups.every(g=>g.discovery&&Array.isArray(g.rows)),"consolidated discovery and rankings");
+    check(oneResult.diagnostic.checks.downloadProbe==="pass"&&oneResult.diagnostic.checks.policySwitch==="not_attempted","diagnostic statuses");
+    check(one.logs.filter(x=>x==="SMART_SELECTION_DIAGNOSTIC_BEGIN").length===1&&one.logs.filter(x=>x==="SMART_SELECTION_DIAGNOSTIC_END").length===1,"one complete diagnostic block");
+    const many=mock({groups:{A:Array.from({length:12},(_,i)=>"node-"+i)},selected:{A:"node-0"}});
+    const mr2=(await factory(many.api).run({}, {tag:"一键诊断"})).report;
+    check(mr2.batch.tested.length<=6&&mr2.batch.remainingThisRun>0&&mr2.batch.stopReason==="达到单轮节点上限","bounded one-click coverage is explicit");
     return {passed};
   })();
 }

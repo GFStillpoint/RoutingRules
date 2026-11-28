@@ -1,8 +1,8 @@
-// Smart Selection 0.1.1 | RoutingRules | detection only
+// Smart Selection 0.1.2 | RoutingRules | detection only
 // Loon 3.5.1 (983)+. No policy writes, MitM, or credential collection.
 function createSmartSelection(api) {
   "use strict";
-  const VERSION="0.1.1", KEY="routingrules.smart-selection.v1", LOCK=KEY+".lease";
+  const VERSION="0.1.2", KEY="routingrules.smart-selection.v1", LOCK=KEY+".lease";
   const MB=1000000, H=3600000, BATCH=6, RUN_BYTES=16*MB, RUN_MS=155000;
   const now=api.now, own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
   const unique=a=>Array.from(new Set(a));
@@ -76,7 +76,7 @@ function createSmartSelection(api) {
     const built=new Set(Array.isArray(c.all_buildin_nodes)?c.all_buildin_nodes:[]);
     // Flat leaf groups only in V0.1. Nested groups are not treated as individual nodes.
     for(const name of scoped){
-      let g={name,nodes:[],selected:"",skipped:0,error:null};
+      let g={name,nodes:[],selected:"",skipped:0,error:null,discovery:null};
       groups.push(g);
       if(!known.has(name)){g.error="策略组不存在";continue;}
       try{
@@ -87,7 +87,8 @@ function createSmartSelection(api) {
         // Loon returns JSON arrays of {name,type} in actual clients.
         // Accept legacy name strings too; never probe typed non-node policies.
         if(!Array.isArray(a)){
-          api.log(JSON.stringify({group:name,discovery:{array:false,kind:typeof a}}));
+          g.discovery={array:false,kind:typeof a};
+          api.log(JSON.stringify({group:name,discovery:g.discovery}));
           throw Error("候选节点返回格式未识别");
         }
         const names=[], shape={strings:0,nodes:0,nonNodes:0,unknown:0};
@@ -99,7 +100,8 @@ function createSmartSelection(api) {
           }else shape.unknown++;
         }
         // Log only shape counts, not raw node descriptions or secrets.
-        api.log(JSON.stringify({group:name,discovery:{total:a.length,...shape}}));
+        g.discovery={total:a.length,...shape};
+        api.log(JSON.stringify({group:name,discovery:g.discovery}));
         if(a.length&&shape.strings+shape.nodes+shape.nonNodes===0)throw Error("候选节点条目格式未识别");
         g.nodes=unique(names.filter(x=>!known.has(x)&&!built.has(x)&&!builtIn(x)&&!pseudo(x)));
         g.skipped=a.length-g.nodes.length;
@@ -223,13 +225,16 @@ function createSmartSelection(api) {
   function buildReport(groups,s,net,opts,run){
     return {version:VERSION,mode:"只检测，不切换",network:net.label,networkIdentified:net.known,
       day:s.day,budgetMB:opts.budget/MB,chargedMB:Math.round(s.charged/MB*100)/100,receivedMB:Math.round(s.actual/MB*100)/100,
-      batch:run?{tested:run.tested,chargedMB:Math.round(run.charged/MB*100)/100,stop:run.stop}:null,
+      batch:run?{tested:run.tested,chargedMB:Math.round(run.charged/MB*100)/100,stop:run.stop,stopReason:run.stopReason||null,
+        elapsedMs:now()-run.start,uniqueCandidates:unique(groups.flatMap(g=>g.nodes)).length,
+        remainingThisRun:unique(groups.flatMap(g=>g.nodes)).filter(x=>!run.tested.includes(x)).length,
+        samples:run.samples||[]}:null,
       groups:groups.map(g=>{const rows=g.nodes.map(node=>({node,current:node===g.selected,...quality(getRecord(s,net,node),net,now())})).sort((a,b)=>(b.score??-1)-(a.score??-1)||a.node.localeCompare(b.node));
-        return {name:g.name,selected:g.selected,count:g.nodes.length,skipped:g.skipped,error:g.error,ranked:rows.filter(r=>r.score!=null).length,rows};})};
+        return {name:g.name,selected:g.selected,count:g.nodes.length,skipped:g.skipped,error:g.error,discovery:g.discovery,ranked:rows.filter(r=>r.score!=null).length,rows};})};
   }
   function summary(r){
     const lines=[`Smart Selection ${r.version} · 只检测`,`${r.network}｜今日预算 ${r.chargedMB}/${r.budgetMB} MB（预扣估算）`];
-    if(r.batch)lines.push(`本轮检测 ${r.batch.tested.length} 个节点；${r.batch.chargedMB} MB${r.batch.stop?"；本批提前停止":""}`);
+    if(r.batch)lines.push(`本轮检测 ${r.batch.tested.length}/${r.batch.uniqueCandidates} 个去重节点；${r.batch.chargedMB} MB；${r.batch.stopReason||"本批完成"}`);
     for(const g of r.groups){
       lines.push(`\n${g.name} · ${g.ranked}/${g.count} 已评分${g.skipped?" · 排除 "+g.skipped:""}`);
       if(g.error){lines.push(g.error);continue;}
@@ -238,32 +243,49 @@ function createSmartSelection(api) {
       if(g.rows.length>5)lines.push("其余节点详见脚本日志");
     }
     if(!r.networkIdentified)lines.push("\n网络身份未识别，历史数据仅短期使用。");
-    lines.push("\n完整 JSON 见脚本日志；未执行任何策略切换。");
+    lines.push("\n本次运行的完整诊断、原始测速及各组排名已合并至同一日志，无需另行运行质量报告。未执行任何策略切换。");
     return lines.join("\n");
   }
   async function run(args,context={}){
     const opts=options(args),c=config(),net=network(c);
     const tag=String(context.tag||"");
-    const isReport=tag.includes("质量报告");
+    const isReport=tag.includes("质量报告"); // backward compatibility for cached old entry
+    const unified=tag.includes("一键诊断");
+    if(unified)context={...context,group:"",node:""};
     const token=claim();
     if(!token)return {title:"Smart Selection",content:"已有任务执行，稍后重试"};
     try{
       let s=load();
       const groups=await discover(c,opts,context);
       if(isReport){const report=buildReport(groups,s,net,opts,null);api.log(JSON.stringify(report));return {title:"线路质量报告",content:summary(report),report};}
-      const run={start:now(),charged:0,actual:0,tested:[],stop:false};
+      const run={start:now(),charged:0,actual:0,tested:[],samples:[],stop:false,stopReason:null};
       const candidates=queue(groups,s,net);
       for(const node of candidates){
-        if(run.tested.length>=BATCH||run.stop||now()-run.start>RUN_MS-16000||s.charged+2*MB+48000>opts.budget||run.charged+2*MB+48000>RUN_BYTES)break;
+        if(run.stop){run.stopReason="请求异常，提前结束";break;}
+        if(run.tested.length>=BATCH){run.stopReason="达到单轮节点上限";break;}
+        if(now()-run.start>RUN_MS-16000){run.stopReason="达到单轮时间上限";break;}
+        if(s.charged+2*MB+48000>opts.budget){run.stopReason="当日剩余预算不足";break;}
+        if(run.charged+2*MB+48000>RUN_BYTES){run.stopReason="达到单轮流量上限";break;}
         // Abort if identified Wi-Fi changes during a batch.
-        if(network(config()).key!==net.key){run.stop=true;break;}
+        if(network(config()).key!==net.key){run.stop=true;run.stopReason="网络环境变化";break;}
         const sample=await probe(node,s,opts,run,token);
-        if(sample.attempts){record(s,net,node,sample);run.tested.push(node);api.log(JSON.stringify({node,sample}));save(s);}
+        if(sample.attempts){record(s,net,node,sample);run.tested.push(node);run.samples.push({node,sample});api.log(JSON.stringify({node,sample}));save(s);}
       }
       s.cursor=(s.cursor||0)+1;prune(s);s.last=now();save(s);
+      if(!run.stopReason)run.stopReason=run.stop?"请求异常，提前结束":candidates.length===0?"没有可测速节点":"本轮候选检测完成";
       const report=buildReport(groups,s,net,opts,run);
+      report.diagnostic={schema:1,generatedAt:new Date(now()).toISOString(),scope:unified?"all_configured_groups":"configured_scope",checks:{
+        groupDiscovery:groups.length>0&&groups.every(g=>!g.error)?"pass":groups.some(g=>!g.error)?"partial":"fail",
+        selectedRead:groups.every(g=>g.selected)?"pass":"partial",
+        lightProbe:run.samples.some(x=>x.sample.lat.length)?"pass":run.samples.length?"no_success":"not_run",
+        downloadProbe:run.samples.some(x=>x.sample.mbps!=null)?"pass":run.samples.length?"no_valid_download":"not_run",
+        sharedBudget:s.charged<=opts.budget?"within_limit":"over_estimate",
+        ranking:report.groups.some(g=>g.ranked>0)?"available":"not_available",
+        egressVerification:"not_verified",policySwitch:"not_attempted"}};
+      api.log("SMART_SELECTION_DIAGNOSTIC_BEGIN");
       api.log(JSON.stringify(report));
-      return {title:"线路检测完成",content:summary(report),report};
+      api.log("SMART_SELECTION_DIAGNOSTIC_END");
+      return {title:"一键诊断完成",content:summary(report),report};
     }finally{release(token);}
   }
   return {run,quality,queue,options,network,newState,buildReport};
